@@ -41,3 +41,8 @@ def forgotPassword():
 @views.route('/pertanyaanku')
 def pertanyaanku():
     return render_template('pertanyaanku.html')
+
+
+@views.route('/disimpan')
+def disimpan():
+    return render_template('disimpan.html')

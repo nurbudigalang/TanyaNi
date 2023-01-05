@@ -59,14 +59,16 @@ content %}
   }
 
   .notif .btn-light {
-    font-size: x-small;
+    font-size: small;
   }
 </style>
 
 <div class="container-fluid flex-column justify-content-between p-5 pb-0">
   <div class="title">
     <h5>Semua Jawaban</h5>
-    <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+    <a href="{{ url_for('views.buatPertanyaan') }}">
+      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+    </a>
   </div>
 
   <div class="dropdown text-end pt-4 pb-4">

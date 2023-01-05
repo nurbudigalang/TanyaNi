@@ -1,12 +1,12 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Disimpan{% endblock %} {% block
+content %}
 <style>
-  .beranda {
+  .disimpan {
     background-color: rgb(157, 249, 157, 20%);
     font-weight: 600;
   }
 
-  .beranda .menu {
+  .disimpan .menu {
     color: #4ea24e;
   }
 
@@ -55,7 +55,7 @@
   }
 
   .card-footer .bi-bookmark-fill {
-    border-color: #4ea24e;
+    color: #4ea24e;
   }
 
   .card-footer a {
@@ -65,12 +65,6 @@
 </style>
 
 <div class="container-fluid flex-column justify-content-between p-5">
-  <div class="text-end">
-    <a href="{{ url_for('views.buatPertanyaan') }}">
-      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    </a>
-  </div>
-
   <div class="row pt-4 d-flex flex-column">
     <div class="col pb-4">
       <div class="card">
@@ -183,7 +177,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"><i class="bi bi-bookmark" id="saved"></i></a>
+          <a type="button"><i class="bi bi-bookmark-fill" id="saved"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >
@@ -242,9 +236,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"
-            ><i class="bi bi-bookmark" id="saved" onclick="myFunction()"></i
-          ></a>
+          <a type="button"><i class="bi bi-bookmark-fill" id="saved"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >
