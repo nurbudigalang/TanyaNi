@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap');
 
 body {
   font-family: Inter;
@@ -21,6 +21,7 @@ body {
   width: 12vw;
   margin: 0 5px;
   font-size: 1vw;
+  font-weight: 500;
 }
 
 .btn-primary:active,
@@ -97,6 +98,7 @@ body {
 
 .menu {
   font-size: 1rem;
+  font-weight: 500;
   color: #868881;
   text-align: center; /*disini*/
 }

@@ -29,7 +29,8 @@ block content %}
         display: none;
     } */
 
-  .side-bar {
+  .side-bar,
+  .account-side {
     display: none;
   }
 
@@ -41,7 +42,7 @@ block content %}
   .buat-pertanyaan p,
   li {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .buat-pertanyaan .steps {
@@ -54,6 +55,7 @@ block content %}
     color: #868881;
     margin: 0 5px;
     font-size: 1vw;
+    font-weight: 500;
   }
 
   .btn-light:hover {
@@ -116,8 +118,12 @@ block content %}
   </div>
 
   <div class="d-flex flex-row">
-    <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    <button type="button" class="btn btn-light">Batal</button>
+    <a href="">
+      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+    </a>
+    <a href="{{ url_for('views.home') }}">
+      <button type="button" class="btn btn-light">Batal</button>
+    </a>
   </div>
 </div>
 

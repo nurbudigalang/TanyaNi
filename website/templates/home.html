@@ -1,13 +1,17 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
 <style>
+  .account-side {
+    display: none;
+  }
+
   .beranda {
     background-color: rgb(157, 249, 157, 20%);
-    font-weight: 600;
   }
 
   .beranda .menu {
     color: #4ea24e;
+    font-weight: 600;
   }
 
   .card-header {
@@ -17,6 +21,10 @@
   .card-header .bi,
   .card-footer .bi {
     color: #868881;
+  }
+
+  .card-header .profil .media-body a {
+    font-weight: 500;
   }
 
   .card-header .profil .text-muted {
@@ -124,7 +132,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"> <i class="bi bi-bookmark-fill"></i></a>
+          <a type="button"> <i class="bi bi-bookmark"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >
