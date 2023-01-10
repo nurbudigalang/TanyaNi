@@ -56,3 +56,8 @@ def editProfil():
 @views.route('/hapusProfil')
 def hapusProfil():
     return render_template('hapusProfil.html')
+
+
+@views.route('/jawaban')
+def jawaban():
+    return render_template('jawaban.html')
