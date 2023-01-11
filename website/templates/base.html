@@ -30,7 +30,7 @@
       class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url_for('views.home') }}">
           <!-- <h2>L O G O</h2> -->
           <img src="/static/Tanyani.png" alt="" />
         </a>
@@ -79,7 +79,7 @@
               </a>
             </li>
             <li class="nav-item image">
-              <a class="" href="#">
+              <a class="" href="{{ url_for('views.editProfil') }}">
                 <img
                   src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
                   alt=""
@@ -97,9 +97,12 @@
     <div class="cek"></div>
 
     <div class="row test">
-      <div class="col-2 border-end border-2 p-0 ckck">
+      <div class="col-2 border-end border-2 p-0">
         <div class="container-fluid side-bar">
-          <ul class="nav align-items-center align-items-sm-start" id="menu">
+          <ul
+            class="nav align-items-center align-items-sm-start ckck"
+            id="menu"
+          >
             <li class="nav-item p-2 tos beranda">
               <a
                 href="{{ url_for('views.home') }}"
@@ -119,16 +122,44 @@
               >
             </li>
             <li class="nav-item p-2 tos jawaban">
-              <a href="#" class="nav-link px-0 align-middle font-italic menu">
+              <a
+                href="{{ url_for('views.jawaban') }}"
+                class="nav-link px-0 align-middle font-italic menu"
+              >
                 <i class="bi bi-chat-dots"></i>
                 <span class="ms-2 d-none d-lg-inline">Jawaban</span>
               </a>
             </li>
             <li class="nav-item p-2 tos disimpan">
-              <a href="#" class="nav-link px-0 align-middle font-italic menu">
+              <a
+                href="{{ url_for('views.disimpan') }}"
+                class="nav-link px-0 align-middle font-italic menu"
+              >
                 <i class="bi bi-bookmark"></i>
                 <span class="ms-2 d-none d-lg-inline">Disimpan</span>
               </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container-fluid account-side">
+          <div class="informasi p-3">INFORMASI PERSONAL</div>
+          <ul class="nav align-items-sm-start" id="menu">
+            <li class="nav-item p-2 tos editProfil">
+              <a
+                href="{{ url_for('views.editProfil') }}"
+                class="nav-link align-middle font-italic menu text-start"
+              >
+                <span class="ms-2">Edit Profil</span>
+              </a>
+            </li>
+            <li class="nav-item p-2 tos hapusProfil">
+              <a
+                href="{{ url_for('views.hapusProfil') }}"
+                class="nav-link align-middle font-italic menu text-start"
+              >
+                <span class="ms-2">Hapus Profil</span></a
+              >
             </li>
           </ul>
         </div>
