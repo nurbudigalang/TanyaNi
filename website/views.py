@@ -1,43 +1,35 @@
 from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 
-views = Blueprint('views', __name__)
+views = Blueprint("views", __name__)
 
 
-@views.route('/')
+@views.route("/")
+@login_required
 def home():
-    return render_template('home.html')
+    return render_template("home.html")
 
 
-@views.route('/errorPage')
+@views.route("/errorPage")
 def errorPage():
-    return render_template('errorPage.html')
+    return render_template("errorPage.html")
 
 
-@views.route('/notification')
+@views.route("/notification")
 def notification():
-    return render_template('notification.html')
+    return render_template("notification.html")
 
 
-@views.route('/buatPertanyaan')
+@views.route("/buatPertanyaan")
 def buatPertanyaan():
-    return render_template('buatPertanyaan.html')
+    return render_template("buatPertanyaan.html")
 
 
-@views.route('/login')
-def login():
-    return render_template('login.html')
-
-
-@views.route('/createAccount')
-def createAccount():
-    return render_template('create-account.html')
-
-
-@views.route('/forgotPassword')
+@views.route("/forgotPassword")
 def forgotPassword():
-    return render_template('forgot-password.html')
+    return render_template("forgot-password.html")
 
 
-@views.route('/pertanyaanku')
+@views.route("/pertanyaanku")
 def pertanyaanku():
-    return render_template('pertanyaanku.html')
+    return render_template("pertanyaanku.html")
