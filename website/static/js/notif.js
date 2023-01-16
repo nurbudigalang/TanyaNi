@@ -2,13 +2,13 @@ const unReadMessages = document.querySelectorAll(".unread");
 const unread = document.getElementById("notifications");
 const markAll = document.getElementById("mark_all");
 
-unread.innerText = unReadMessages.length;
+// unread.innerText = unReadMessages.length;
 
 unReadMessages.forEach((message) => {
     message.addEventListener("click", () => {
         message.classList.remove("unread");
         const newUnreadMessages = document.querySelectorAll(".unread");
-        unread.innerText = newUnreadMessages.length;
+        // unread.innerText = newUnreadMessages.length;
     })
 })
 
@@ -17,5 +17,5 @@ markAll.addEventListener("click", () => {
         message.classList.remove("unread")
     })
     const newUnreadMessages = document.querySelectorAll(".unread");
-    unread.innerText = newUnreadMessages.length;
+    // unread.innerText = newUnreadMessages.length;
 })
