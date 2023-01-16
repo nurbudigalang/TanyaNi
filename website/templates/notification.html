@@ -51,18 +51,16 @@ content %}
   }
   </style>
   
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/notification.css') }}"
-  />
-  
-  <script src="{{ url_for('static', filename='js/notif.js') }}"></script>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/notification.css') }}"
+/>
 
 <div class="container-fluid notification">
     <div class="title d-flex justify-content-between">
         <h5>Notifikasi</h3>
         <span id="notifications"></span>
-        <a href="#" class="text-decoration-none mark_all">Tandai Semua Sudah Dibaca</a>
+        <a id="mark_all" href="#" class="text-decoration-none">Tandai Semua Sudah Dibaca</a>
     </div>
     <div class="row pt-2 d-flex flex-column">
         <div class="col border-top border-bottom unread">
@@ -107,5 +105,7 @@ content %}
         </div>
     </div>
 </div>
+
+<script src="{{ url_for('static', filename='js/notif.js') }}"></script>
 
 {% endblock %}
