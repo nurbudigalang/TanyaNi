@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Buat Pertanyaan{% endblock %} {%
 block content %}
 
-<meta charset="utf-8" />
+<!-- <meta charset="utf-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -22,7 +22,7 @@ block content %}
     menubar: false,
     statusbar: false,
   });
-</script>
+</script> -->
 
 <style>
   /* .test .col-2{
@@ -39,8 +39,10 @@ block content %}
     font-weight: 600;
   }
 
+  .form-control,
   .buat-pertanyaan p,
-  li {
+  li,
+  label {
     font-size: 14px;
     font-weight: 500;
   }
@@ -107,6 +109,11 @@ block content %}
         placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
       ></textarea>
     </form>
+  </div>
+
+  <div class="card file p-4 mb-4">
+    <label for="formFileMultiple" class="form-label">Upload File</label>
+    <input class="form-control" type="file" id="formFileMultiple" multiple />
   </div>
 
   <div class="card tags p-4 mb-4">
