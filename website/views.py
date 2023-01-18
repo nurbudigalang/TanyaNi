@@ -61,3 +61,8 @@ def hapusProfil():
 @views.route('/jawaban')
 def jawaban():
     return render_template('jawaban.html')
+
+
+@views.route('/detailPertanyaan')
+def detailPertanyaan():
+    return render_template('detailPertanyaan.html')
