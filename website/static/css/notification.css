@@ -51,3 +51,7 @@ span{
     font-size: 12px;
     font-weight: 400;
 }
+
+.notification .profil .media-body a{
+    font-weight: 500;
+}

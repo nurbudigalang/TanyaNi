@@ -1,17 +1,35 @@
 {% extends "base.html" %} {% block title %}Detail Pertanyaan{% endblock %} {%
 block content %}
 
+<script>
+  const myModal = document.getElementById("myModal");
+  const myInput = document.getElementById("myInput");
+
+  myModal.addEventListener("shown.bs.modal", () => {
+    myInput.focus();
+  });
+</script>
+
 <style>
   .side-bar,
   .account-side {
     display: none;
   }
 
-  .profil .media-body a {
+  .card-header {
+    padding: 1rem 1rem;
+    background-color: white;
+  }
+  .card-header .bi,
+  .card-footer .bi {
+    color: #868881;
+  }
+
+  .card-header .profil .media-body a {
     font-weight: 500;
   }
 
-  .profil .text-muted {
+  .card-header .profil .text-muted {
     font-size: 12px;
   }
 
@@ -35,79 +53,183 @@ block content %}
     border-color: #868881;
   }
 
-  .card-body {
+  /* .card-body {
     padding-left: 5vw;
     padding-right: 5vw;
-  }
+  } */
 
-  .footer {
-    padding: 1rem 0;
-    color: #868881;
+  .card-footer {
+    padding: 1rem 1rem;
     background-color: white;
   }
 
-  .footer .bi {
+  .card-footer .bi {
     font-size: medium;
     padding: 2px;
   }
 
-  .footer .bi-bookmark-fill {
+  .card-footer .bi-bookmark-fill {
     border-color: #4ea24e;
   }
 
-  .footer a {
+  .card-footer a {
     color: #868881;
     font-size: small;
+  }
+
+  a:not([href]):not([class]),
+  a:not([href]):not([class]):hover {
+    color: #868881;
+  }
+
+  textarea {
+    width: 100%;
+    border: none;
+    outline: none;
   }
 </style>
 
 <div class="container-fluid p-5">
-  <div
-    class="profil d-flex align-items-center border-2 border-bottom pb-3 mb-3"
-  >
-    <img
-      src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-      alt=""
-      width="50"
-      height="50"
-      class="d-block ui-w-40 rounded-circle"
-    />
-    <div class="media-body ps-2">
-      <a href="#" data-abc="true" class="text-dark text-decoration-none"
-        >Bambang</a
-      >
-      <div class="text-muted">15m yang lalu</div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between border-0">
+      <div class="profil d-flex align-items-center">
+        <img
+          src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+          alt=""
+          width="50"
+          height="50"
+          class="d-block ui-w-40 rounded-circle"
+        />
+        <div class="media-body ps-2">
+          <a href="#" data-abc="true" class="text-dark text-decoration-none"
+            >Bambang</a
+          >
+          <div class="text-muted small">15m yang lalu</div>
+        </div>
+      </div>
+      <div class="closetab">
+        <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+      </div>
+    </div>
+
+    <div class="card-body d-flex flex-column">
+      <div class="d-flex justify-content-between Title">
+        <p class="fw-bold">Apa pupuk yang cocok untuk menanam mangga?</p>
+        <div class="key-word">
+          <button type="button" class="btn btn-light btn-sm">Menanam</button>
+          <button type="button" class="btn btn-light btn-sm d-none d-xl-inline">
+            Mangga
+          </button>
+        </div>
+      </div>
+      <div class="question">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+          quam ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis
+          voluptates corrupti reiciendis repudiandae dignissimos ipsa sequi
+          tempora sed iure!
+        </p>
+      </div>
+      <div class="image">
+        <img
+          class="img-fluid"
+          src="https://assets.pikiran-rakyat.com/crop/0x0:0x0/x/photo/2020/09/17/1517003805.jpg"
+          alt=""
+        />
+      </div>
     </div>
   </div>
-  <div class="d-flex justify-content-between Title">
-    <p class="fw-bold">Apa pupuk yang cocok untuk menanam mangga?</p>
-    <div class="key-word">
-      <!-- <span class="badge bg-secondary" href="#">Menanam</span> -->
-      <button type="button" class="btn btn-light btn-sm">Menanam</button>
-      <button type="button" class="btn btn-light btn-sm d-none d-xl-inline">
-        Mangga
-      </button>
-    </div>
-  </div>
-  <div class="question">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quam
-      ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis voluptates
-      corrupti reiciendis repudiandae dignissimos ipsa sequi tempora sed iure!
-    </p>
-  </div>
-  <div class="image">
-    <img
-      class="img-fluid"
-      src="https://asset.kompas.com/crops/XaytURaJTn1-yLXfwYnWzoSi82w=/62x43:942x630/750x500/data/photo/2022/06/13/62a6f4083f268.jpg"
-      alt=""
-    />
-  </div>
-  <div class="footer">
-    <a type="button"> <i class="bi bi-bookmark"></i></a>
-    <a type="button" href="#" class="text-decoration-none"
-      ><i class="bi bi-chat"></i> 64+</a
+
+  <div class="pt-5 pb-5">
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
     >
+      <i class="bi bi-pencil-square"></i> Jawab
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              placeholder="Tuliskan Jawaban Anda Disini"
+            ></textarea>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Jawab</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between">
+      <div class="profil d-flex align-items-center">
+        <img
+          src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+          alt=""
+          width="50"
+          height="50"
+          class="d-block ui-w-40 rounded-circle"
+        />
+        <div class="media-body ps-2">
+          <a href="#" data-abc="true" class="text-dark text-decoration-none"
+            >Bambang</a
+          >
+          <div class="text-muted">15m yang lalu</div>
+        </div>
+      </div>
+      <div class="closetab">
+        <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+      </div>
+    </div>
+
+    <div class="card-body d-flex flex-column">
+      <div class="question">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
+          quam ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis
+          voluptates corrupti reiciendis repudiandae dignissimos ipsa sequi
+          tempora sed iure!
+        </p>
+      </div>
+      <div class="image">
+        <img
+          class="img-fluid"
+          src="https://asset.kompas.com/crops/XaytURaJTn1-yLXfwYnWzoSi82w=/62x43:942x630/750x500/data/photo/2022/06/13/62a6f4083f268.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="card-footer">
+      <a type="button"> <i class="bi bi-hand-thumbs-up"></i> 22</a>
+      <a type="button"> <i class="bi bi-hand-thumbs-down"></i> 5</a>
+    </div>
   </div>
 </div>
 
