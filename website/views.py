@@ -50,38 +50,3 @@ def editProfil():
 @views.route("/hapusProfil")
 def hapusProfil():
     return render_template("hapusProfil.html")
-
-
-@views.route("/jawaban")
-def jawaban():
-    return render_template("jawaban.html")
-
-
-@views.route("/disimpan")
-def disimpan():
-    return render_template("disimpan.html")
-
-
-@views.route("/editProfil")
-def editProfil():
-    return render_template("editProfil.html")
-
-
-@views.route("/hapusProfil")
-def hapusProfil():
-    return render_template("hapusProfil.html")
-
-
-@views.route("/jawaban")
-def jawaban():
-    return render_template("jawaban.html")
-
-
-@views.route('/detailPertanyaan')
-def detailPertanyaan():
-    return render_template('detailPertanyaan.html')
-
-
-@views.route('/detailPertanyaan')
-def detailPertanyaan():
-    return render_template('detailPertanyaan.html')
