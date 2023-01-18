@@ -1,0 +1,114 @@
+{% extends "base.html" %} {% block title %}Detail Pertanyaan{% endblock %} {%
+block content %}
+
+<style>
+  .side-bar,
+  .account-side {
+    display: none;
+  }
+
+  .profil .media-body a {
+    font-weight: 500;
+  }
+
+  .profil .text-muted {
+    font-size: 12px;
+  }
+
+  .key-word button {
+    color: #868881;
+    font-size: x-small;
+  }
+
+  .question p {
+    color: #868881;
+    font-size: small;
+  }
+
+  .key-word button {
+    border-color: #868881;
+    color: #868881;
+    margin: 0 5px;
+  }
+
+  .key-word button:hover {
+    border-color: #868881;
+  }
+
+  .card-body {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .footer {
+    padding: 1rem 0;
+    color: #868881;
+    background-color: white;
+  }
+
+  .footer .bi {
+    font-size: medium;
+    padding: 2px;
+  }
+
+  .footer .bi-bookmark-fill {
+    border-color: #4ea24e;
+  }
+
+  .footer a {
+    color: #868881;
+    font-size: small;
+  }
+</style>
+
+<div class="container-fluid p-5">
+  <div
+    class="profil d-flex align-items-center border-2 border-bottom pb-3 mb-3"
+  >
+    <img
+      src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+      alt=""
+      width="50"
+      height="50"
+      class="d-block ui-w-40 rounded-circle"
+    />
+    <div class="media-body ps-2">
+      <a href="#" data-abc="true" class="text-dark text-decoration-none"
+        >Bambang</a
+      >
+      <div class="text-muted">15m yang lalu</div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between Title">
+    <p class="fw-bold">Apa pupuk yang cocok untuk menanam mangga?</p>
+    <div class="key-word">
+      <!-- <span class="badge bg-secondary" href="#">Menanam</span> -->
+      <button type="button" class="btn btn-light btn-sm">Menanam</button>
+      <button type="button" class="btn btn-light btn-sm d-none d-xl-inline">
+        Mangga
+      </button>
+    </div>
+  </div>
+  <div class="question">
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quam
+      ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis voluptates
+      corrupti reiciendis repudiandae dignissimos ipsa sequi tempora sed iure!
+    </p>
+  </div>
+  <div class="image">
+    <img
+      class="img-fluid"
+      src="https://asset.kompas.com/crops/XaytURaJTn1-yLXfwYnWzoSi82w=/62x43:942x630/750x500/data/photo/2022/06/13/62a6f4083f268.jpg"
+      alt=""
+    />
+  </div>
+  <div class="footer">
+    <a type="button"> <i class="bi bi-bookmark"></i></a>
+    <a type="button" href="#" class="text-decoration-none"
+      ><i class="bi bi-chat"></i> 64+</a
+    >
+  </div>
+</div>
+
+{% endblock %}
