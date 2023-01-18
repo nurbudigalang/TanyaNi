@@ -35,3 +35,43 @@ def forgotPassword():
 @views.route("/pertanyaanku")
 def pertanyaanku():
     return render_template("pertanyaanku.html")
+
+
+@views.route("/disimpan")
+def disimpan():
+    return render_template("disimpan.html")
+
+
+@views.route("/editProfil")
+def editProfil():
+    return render_template("editProfil.html")
+
+
+@views.route("/hapusProfil")
+def hapusProfil():
+    return render_template("hapusProfil.html")
+
+
+@views.route("/jawaban")
+def jawaban():
+    return render_template("jawaban.html")
+
+
+@views.route("/disimpan")
+def disimpan():
+    return render_template("disimpan.html")
+
+
+@views.route("/editProfil")
+def editProfil():
+    return render_template("editProfil.html")
+
+
+@views.route("/hapusProfil")
+def hapusProfil():
+    return render_template("hapusProfil.html")
+
+
+@views.route("/jawaban")
+def jawaban():
+    return render_template("jawaban.html")

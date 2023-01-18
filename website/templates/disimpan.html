@@ -1,15 +1,15 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Disimpan{% endblock %} {% block
+content %}
 <style>
   .account-side {
     display: none;
   }
 
-  .beranda {
+  .disimpan {
     background-color: rgb(157, 249, 157, 20%);
   }
 
-  .beranda .menu {
+  .disimpan .menu {
     color: #4ea24e;
     font-weight: 600;
   }
@@ -23,20 +23,12 @@
     color: #868881;
   }
 
-  .card-header .profil .media-body a {
-    font-weight: 500;
-  }
-
   .card-header .profil .text-muted {
     font-size: 12px;
   }
 
+  .question p,
   .key-word button {
-    color: #868881;
-    font-size: x-small;
-  }
-
-  .question p {
     color: #868881;
     font-size: small;
   }
@@ -67,7 +59,7 @@
   }
 
   .card-footer .bi-bookmark-fill {
-    border-color: #4ea24e;
+    color: #4ea24e;
   }
 
   .card-footer a {
@@ -77,12 +69,6 @@
 </style>
 
 <div class="container-fluid flex-column justify-content-between p-5">
-  <div class="text-end">
-    <a href="{{ url_for('views.buatPertanyaan') }}">
-      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    </a>
-  </div>
-
   <div class="row pt-4 d-flex flex-column">
     <div class="col pb-4">
       <div class="card">
@@ -116,12 +102,7 @@
               <button type="button" class="btn btn-light btn-sm">
                 Menanam
               </button>
-              <button
-                type="button"
-                class="btn btn-light btn-sm d-none d-xl-inline"
-              >
-                Mangga
-              </button>
+              <button type="button" class="btn btn-light btn-sm">Mangga</button>
             </div>
           </div>
           <div class="question">
@@ -141,7 +122,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"> <i class="bi bi-bookmark"></i></a>
+          <a type="button"> <i class="bi bi-bookmark-fill"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >
@@ -180,12 +161,7 @@
               <button type="button" class="btn btn-light btn-sm">
                 Menanam
               </button>
-              <button
-                type="button"
-                class="btn btn-light btn-sm d-none d-xl-inline"
-              >
-                Mangga
-              </button>
+              <button type="button" class="btn btn-light btn-sm">Mangga</button>
             </div>
           </div>
           <div class="question">
@@ -205,7 +181,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"><i class="bi bi-bookmark" id="saved"></i></a>
+          <a type="button"><i class="bi bi-bookmark-fill" id="saved"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >
@@ -244,12 +220,7 @@
               <button type="button" class="btn btn-light btn-sm">
                 Menanam
               </button>
-              <button
-                type="button"
-                class="btn btn-light btn-sm d-none d-xl-inline"
-              >
-                Mangga
-              </button>
+              <button type="button" class="btn btn-light btn-sm">Mangga</button>
             </div>
           </div>
           <div class="question">
@@ -269,9 +240,7 @@
           </div>
         </div>
         <div class="card-footer">
-          <a type="button"
-            ><i class="bi bi-bookmark" id="saved" onclick="myFunction()"></i
-          ></a>
+          <a type="button"><i class="bi bi-bookmark-fill" id="saved"></i></a>
           <a type="button" href="#" class="text-decoration-none"
             ><i class="bi bi-chat"></i> 64+</a
           >

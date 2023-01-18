@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Buat Pertanyaan{% endblock %} {%
 block content %}
 
-<meta charset="utf-8" />
+<!-- <meta charset="utf-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -22,14 +22,15 @@ block content %}
     menubar: false,
     statusbar: false,
   });
-</script>
+</script> -->
 
 <style>
   /* .test .col-2{
         display: none;
     } */
 
-  .side-bar {
+  .side-bar,
+  .account-side {
     display: none;
   }
 
@@ -38,10 +39,12 @@ block content %}
     font-weight: 600;
   }
 
+  .form-control,
   .buat-pertanyaan p,
-  li {
+  li,
+  label {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .buat-pertanyaan .steps {
@@ -54,6 +57,7 @@ block content %}
     color: #868881;
     margin: 0 5px;
     font-size: 1vw;
+    font-weight: 500;
   }
 
   .btn-light:hover {
@@ -103,7 +107,13 @@ block content %}
         rows="10"
         placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
       ></textarea>
-    </div>
+    </form>
+  </div>
+
+  <div class="card file p-4 mb-4">
+    <label for="formFileMultiple" class="form-label">Upload File</label>
+    <input class="form-control" type="file" id="formFileMultiple" multiple />
+  </div>
 
     <div class="card tags p-4 mb-4">
       <h5>Tags</h5>
@@ -111,11 +121,14 @@ block content %}
       <input type="" class="form-control" id="tag" name="tag" placeholder="" />
     </div>
 
-    <div class="d-flex flex-row">
-      <button type="submit" class="btn btn-primary">Buat Pertanyaan</button>
-      <a href="/" type="button" class="btn btn-light">Batal</a>
-    </div>
-  </form>
+  <div class="d-flex flex-row">
+    <a href="">
+      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+    </a>
+    <a href="{{ url_for('views.home') }}">
+      <button type="button" class="btn btn-light">Batal</button>
+    </a>
+  </div>
 </div>
 
 {% endblock %}
