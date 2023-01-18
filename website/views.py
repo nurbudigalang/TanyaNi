@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 
 views = Blueprint("views", __name__)
@@ -20,8 +20,10 @@ def notification():
     return render_template("notification.html")
 
 
-@views.route("/buatPertanyaan")
+@views.route("/buatPertanyaan", methods=["GET", "POST"])
 def buatPertanyaan():
+    if request.method == "POST":
+        print(request.form.get("detail"))
     return render_template("buatPertanyaan.html")
 
 
