@@ -63,3 +63,7 @@ span{
 .unread:active {
     background-color: white;
 }
+
+.unread:hover {
+    cursor: pointer;
+}
