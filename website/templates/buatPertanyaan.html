@@ -65,6 +65,11 @@ block content %}
   }
 </style>
 
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='js/center.js') }}"
+/>
+
 <div class="container-fluid p-5 buat-pertanyaan">
   <div class="card steps p-4 mb-4">
     <h5>Membuat pertanyaan yang baik</h5>
@@ -89,11 +94,12 @@ block content %}
       <h5>Judul</h5>
       <p>Buat judul Anda dengan spesifik.</p>
       <input
-        type=""
+        type="text"
         class="form-control"
         id="judul"
         name="judul"
         placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
+        required
       />
     </div>
 
@@ -106,29 +112,48 @@ block content %}
         class="form-control"
         rows="10"
         placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
+        required
       ></textarea>
-    </form>
-  </div>
+    </div>
 
-  <div class="card file p-4 mb-4">
-    <label for="formFileMultiple" class="form-label">Upload File</label>
-    <input class="form-control" type="file" id="formFileMultiple" multiple />
-  </div>
+    <div class="card file p-4 mb-4">
+      <label for="formFileMultiple" class="form-label">Upload File</label>
+      <input
+        class="form-control"
+        type="file"
+        id="formFileMultiple"
+        multiple
+        required
+      />
+    </div>
 
     <div class="card tags p-4 mb-4">
       <h5>Tags</h5>
       <p>Tambahkan tag yang berkaitan dengan pertanyaan Anda.</p>
-      <input type="" class="form-control" id="tag" name="tag" placeholder="" />
+      <input
+        type="text"
+        class="form-control"
+        id="tag"
+        name="tag"
+        placeholder=""
+        required
+      />
     </div>
 
-  <div class="d-flex flex-row">
-    <a href="">
-      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    </a>
-    <a href="{{ url_for('views.home') }}">
-      <button type="button" class="btn btn-light">Batal</button>
-    </a>
-  </div>
+    <div class="d-flex flex-row">
+      <a href="">
+        <button type="submit" class="btn btn-primary">Buat Pertanyaan</button>
+      </a>
+      <a href="{{ url_for('views.home') }}">
+        <button type="submit" class="btn btn-light">Batal</button>
+      </a>
+    </div>
+  </form>
 </div>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='js/center.js') }}"
+/>
 
 {% endblock %}
