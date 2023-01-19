@@ -38,7 +38,7 @@ block content %}
     font-size: x-small;
   }
 
-  .question p {
+  .detail p {
     color: #868881;
     font-size: small;
   }
@@ -53,10 +53,13 @@ block content %}
     border-color: #868881;
   }
 
-  /* .card-body {
-    padding-left: 5vw;
-    padding-right: 5vw;
-  } */
+  .question .card-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .question .Title p {
+    color: #4ea24e;
+  }
 
   .card-footer {
     padding: 1rem 1rem;
@@ -87,10 +90,19 @@ block content %}
     border: none;
     outline: none;
   }
+
+  hr:not([size]) {
+    height: 2px;
+  }
+
+  .pb-3 span {
+    font-weight: 600;
+    font-size: larger;
+  }
 </style>
 
 <div class="container-fluid p-5">
-  <div class="card">
+  <div class="card question">
     <div class="card-header d-flex justify-content-between border-0">
       <div class="profil d-flex align-items-center">
         <img
@@ -122,7 +134,7 @@ block content %}
           </button>
         </div>
       </div>
-      <div class="question">
+      <div class="detail">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
           quam ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis
@@ -140,7 +152,7 @@ block content %}
     </div>
   </div>
 
-  <div class="pt-5 pb-5">
+  <div class="mt-5">
     <button
       type="button"
       class="btn btn-primary"
@@ -174,8 +186,8 @@ block content %}
             <textarea
               name=""
               id=""
-              cols="30"
-              rows="10"
+              cols="50"
+              rows="15"
               placeholder="Tuliskan Jawaban Anda Disini"
             ></textarea>
           </form>
@@ -185,6 +197,12 @@ block content %}
         </div>
       </div>
     </div>
+  </div>
+
+  <hr style="margin: 3rem 0" />
+
+  <div class="pb-3">
+    <span>5 Jawaban</span>
   </div>
 
   <div class="card">
@@ -210,7 +228,7 @@ block content %}
     </div>
 
     <div class="card-body d-flex flex-column">
-      <div class="question">
+      <div class="detail">
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
           quam ad, molestiae assumenda expedita, aut iste rem nisi, qui omnis
