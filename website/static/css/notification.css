@@ -26,7 +26,7 @@
 
 .notification .col {
     padding: 20px 30px;
-    background-color: rgb(157, 249, 157, 20%);
+    /* background-color: rgb(157, 249, 157, 20%); */
 }
 
 /* .notification .row :hover{
@@ -54,4 +54,16 @@ span{
 
 .notification .profil .media-body a{
     font-weight: 500;
+}
+
+.unread {
+    background-color: rgb(157, 249, 157, 20%);
+}
+
+.unread:active {
+    background-color: white;
+}
+
+.unread:hover {
+    cursor: pointer;
 }
