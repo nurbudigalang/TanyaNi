@@ -1,5 +1,8 @@
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
+from werkzeug.utils import secure_filename
+import os
+from .models import Pertanyaan
 
 views = Blueprint("views", __name__)
 
@@ -7,7 +10,7 @@ views = Blueprint("views", __name__)
 @views.route("/")
 @login_required
 def home():
-    return render_template("home.html")
+    return render_template("home.html", posts=Pertanyaan.query.all())
 
 
 @views.route("/errorPage")
@@ -18,13 +21,6 @@ def errorPage():
 @views.route("/notification")
 def notification():
     return render_template("notification.html")
-
-
-@views.route("/buatPertanyaan", methods=["GET", "POST"])
-def buatPertanyaan():
-    if request.method == "POST":
-        print(request.form.get("detail"))
-    return render_template("buatPertanyaan.html")
 
 
 @views.route("/forgotPassword")
