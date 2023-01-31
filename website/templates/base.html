@@ -82,7 +82,7 @@
               </a>
             </li>
             <li class="nav-item image">
-              <a class="" href="{{ url_for('views.editProfil') }}">
+              <a class="" href="{{ url_for('auth.editProfil') }}">
                 <img
                   src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
                   alt=""
@@ -167,7 +167,7 @@
           <ul class="nav align-items-sm-start" id="menu">
             <li class="nav-item p-2 tos editProfil">
               <a
-                href="{{ url_for('views.editProfil') }}"
+                href="{{ url_for('auth.editProfil') }}"
                 class="nav-link align-middle font-italic menu text-start"
               >
                 <span class="ms-2">Edit Profil</span>
@@ -182,7 +182,10 @@
               >
             </li>
             <li class="nav-item tos logout">
-              <a href="#" class="nav-link align-middle font-italic menu">
+              <a
+                href="{{ url_for('auth.logout') }}"
+                class="nav-link align-middle font-italic menu"
+              >
                 <i class="bi bi-box-arrow-right"></i>
                 <span class="ms-2">Logout</span></a
               >

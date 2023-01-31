@@ -4,6 +4,7 @@ from os import path
 from flask_login import LoginManager
 from flask_ckeditor import CKEditor
 
+
 db = SQLAlchemy()
 DB_NAME = "tanyaNi.db"
 ckeditor = CKEditor()
@@ -24,7 +25,6 @@ def create_app():
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
     app.register_blueprint(formHandle, url_prefix="/")
-
     from .models import Petani, Pertanyaan, Jawaban, Gambar_jawaban, Gambar_pertanyaan
 
     with app.app_context():
@@ -34,8 +34,14 @@ def create_app():
     login_manager.login_view = "auth.login"
     login_manager.init_app(app)
 
+    def get_user_from_id(id):
+        return Petani.query.get(int(id))
+    
+    app.jinja_env.globals.update(get_user_from_id=get_user_from_id)
+
     @login_manager.user_loader
     def load_user(id):
         return Petani.query.get(int(id))
 
     return app
+

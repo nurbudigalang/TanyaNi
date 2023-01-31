@@ -38,11 +38,6 @@ def disimpan():
     return render_template("disimpan.html")
 
 
-@views.route("/editProfil")
-def editProfil():
-    return render_template("editProfil.html")
-
-
 @views.route("/hapusProfil")
 def hapusProfil():
     return render_template("hapusProfil.html")
