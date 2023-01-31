@@ -120,3 +120,7 @@ body {
 /* .tos:hover{
     background-color: rgb(157, 249, 157, 20%);
 } */
+
+.account-side{
+  height: 100%;
+}

@@ -50,8 +50,10 @@ content %}
     width: 15%;
   }
 
-  .notif .text h5 {
+  .notif .text a {
     color: #4ea24e;
+    font-size: larger;
+    font-weight: 600;
   }
 
   .notif .text p {
@@ -98,7 +100,11 @@ content %}
   <div class="row pt-2 d-flex flex-column">
     <div class="col border-top border-bottom unread d-flex flex-row">
       <div class="text">
-        <h5>Apa pupuk yang cocok untuk menanam mangga?</h5>
+        <a
+          href="{{ url_for('views.detailPertanyaan') }}"
+          class="text-decoration-none"
+          >Apa pupuk yang cocok untuk menanam mangga?</a
+        >
         <p>
           Saya menggunakan pupuk merk X. Tapi, setelah beberapa bulan masih juga
           belum ada pertumbuhan. Apakah metode atau treatment yang saya lakukan
