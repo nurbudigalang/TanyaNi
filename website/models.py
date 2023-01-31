@@ -2,6 +2,8 @@ from . import db
 
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from flask_ckeditor import CKEditorField
+
 
 class Petani(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

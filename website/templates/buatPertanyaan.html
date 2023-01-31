@@ -84,51 +84,32 @@ block content %}
     </ul>
   </div>
 
-  <form class="form-group" method="POST">
+  <form class="form-group" method="POST" enctype="multipart/form-data">
     <div class="card judul p-4 mb-4">
       <h5>Judul</h5>
       <p>Buat judul Anda dengan spesifik.</p>
-      <input
-        type=""
-        class="form-control"
-        id="judul"
-        name="judul"
-        placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
-      />
+      {{form.judul(class='form-control', placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?")}}
     </div>
 
     <div class="card rincian p-4 mb-4">
       <h5>Rincian Permasalahan</h5>
       <p>Buat judul Anda dengan spesifik.</p>
-      <textarea
-        name="detail"
-        id="editor"
-        class="form-control"
-        rows="10"
-        placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
-      ></textarea>
-    </form>
-  </div>
-
-  <div class="card file p-4 mb-4">
-    <label for="formFileMultiple" class="form-label">Upload File</label>
-    <input class="form-control" type="file" id="formFileMultiple" multiple />
-  </div>
+      {{form.detail()}}
+    </div>
 
     <div class="card tags p-4 mb-4">
       <h5>Tags</h5>
       <p>Tambahkan tag yang berkaitan dengan pertanyaan Anda.</p>
-      <input type="" class="form-control" id="tag" name="tag" placeholder="" />
+      {{form.tag(class= 'form-control')}}
     </div>
 
-  <div class="d-flex flex-row">
-    <a href="">
-      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    </a>
-    <a href="{{ url_for('views.home') }}">
-      <button type="button" class="btn btn-light">Batal</button>
-    </a>
-  </div>
+    <div class="d-flex flex-row">
+      {{form.submit(class = "btn btn-primary")}}
+      <a href="{{ url_for('views.home') }}">
+        <button type="button" class="btn btn-light">Batal</button>
+      </a>
+    </div>
+  </form>
+  {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail') }}
 </div>
-
 {% endblock %}
