@@ -11,10 +11,12 @@ controller = Blueprint("controller", __name__)
 def bookmark():
     if request.method == "POST":
         post_id = request.form.get("post_id")
-        bookmark = Bookmark.query.filter_by(id_pertanyaan=post_id, id_petani=current_user.id).first()
+        bookmark = Bookmark.query.filter_by(
+            id_pertanyaan=post_id, id_petani=current_user.id).first()
         if not bookmark:
             # jika belum, tambahkan ke database
-            bookmark = Bookmark(id_pertanyaan=post_id, id_petani=current_user.id)
+            bookmark = Bookmark(id_pertanyaan=post_id,
+                                id_petani=current_user.id)
             db.session.add(bookmark)
         else:
             db.session.delete(bookmark)
@@ -30,7 +32,8 @@ def like_dislike_jawaban():
     petani_id = current_user.id
     jawaban = Jawaban.query.get(jawaban_id)
     # Mengecek apakah petani sudah memberikan vote pada jawaban ini
-    vote = Vote.query.filter_by(id_petani=petani_id, id_jawaban=jawaban_id).first()
+    vote = Vote.query.filter_by(
+        id_petani=petani_id, id_jawaban=jawaban_id).first()
     if vote:
         # Jika petani sudah memberikan vote
         notifikasi = Notifikasi.query.filter_by(
