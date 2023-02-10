@@ -2,6 +2,7 @@
 
 body {
   font-family: Inter;
+  height: 100vh;
 }
 
 ::placeholder {
@@ -121,6 +122,6 @@ body {
     background-color: rgb(157, 249, 157, 20%);
 } */
 
-.account-side{
+.account-side {
   height: 100%;
 }
