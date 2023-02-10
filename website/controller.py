@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, url_for
 from flask_login import login_required, current_user
-from .models import Bookmark, Jawaban, Vote, Notifikasi
+from .models import Bookmark, Jawaban, Vote, Notifikasi, Pertanyaan
 from . import db
 
 controller = Blueprint("controller", __name__)
@@ -38,12 +38,12 @@ def like_dislike_jawaban():
             id_pertanyaan=jawaban.id_pertanyaan,
             id_jawaban=jawaban.id,
         ).first()
-
         if vote.tipe == tipe:
             # Jika tipe vote sebelumnya sama dengan tipe yang dipilih sekarang, maka hapus vote
             if tipe == "like":
                 jawaban.likes -= 1
-                db.session.delete(notifikasi)
+                if current_user.id != jawaban.id_petani:
+                    db.session.delete(notifikasi)
             else:
                 jawaban.dislikes -= 1
             db.session.delete(vote)
@@ -52,10 +52,19 @@ def like_dislike_jawaban():
             if tipe == "like":
                 jawaban.likes += 1
                 jawaban.dislikes -= 1
+                notifikasi = Notifikasi(
+                    id_petani=jawaban.id_petani,
+                    tipe=tipe,
+                    id_pertanyaan=jawaban.id_pertanyaan,
+                    id_jawaban=jawaban.id,
+                )
+                if current_user.id != jawaban.id_petani:
+                    db.session.add(notifikasi)
             else:
                 jawaban.dislikes += 1
                 jawaban.likes -= 1
-                db.session.delete(notifikasi)
+                if current_user.id != jawaban.id_petani:
+                    db.session.delete(notifikasi)
             vote.tipe = tipe
     else:
         # Jika petani belum memberikan vote, maka buat vote baru
@@ -68,7 +77,8 @@ def like_dislike_jawaban():
                 id_pertanyaan=jawaban.id_pertanyaan,
                 id_jawaban=jawaban.id,
             )
-            db.session.add(notifikasi)
+            if current_user.id != jawaban.id_petani:
+                db.session.add(notifikasi)
         else:
             jawaban.dislikes += 1
         db.session.add(vote)
@@ -106,3 +116,14 @@ def api_notif():
         notif.dibaca = True
         db.session.commit()
         return jsonify({"redirect_url": url_for("views.detailPertanyaan", id=notif.id_pertanyaan)})
+
+
+@controller.route("/api/search", methods=["GET"])
+def search():
+    query = request.args.get("query")
+    print(query)
+    pertanyaan = Pertanyaan.query.filter(Pertanyaan.judul.like("%" + query + "%")).all()
+    result = []
+    for p in pertanyaan:
+        result.append({"id": p.id, "judul": p.judul})
+    return jsonify(result)

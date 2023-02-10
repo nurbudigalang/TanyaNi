@@ -25,14 +25,18 @@
         <img class="img-fluid" src="/static/Tanyani.png" alt="" />
       </a>
 
-      <form class="input-group">
-        <input class="form-control border-end-0 border rounded-0" type="search" placeholder="Cari topik yang diinginkan"
+      <form class="input-group" autocomplete="off">
+        <input class="form-control rounded-0" type="search" placeholder="Cari topik yang diinginkan"
           id="example-search-input" />
-        <span class="input-group-append">
-          <button class="btn btn-outline-secondary bg-white border-0 rounded-0 ms-n5" type="button">
-            <i class="fa fa-search"></i>
-          </button>
-        </span>
+        <div class="input-group-append">
+          <i class="fa fa-search"></i>
+        </div>
+        <div class="instant-results m-0">
+          <ul class="list-unstyled result-bucket mb-0" id="results-list">
+
+
+          </ul>
+        </div>
       </form>
 
       <button class="navbar-toggler ml-auto custom-toggler" type="button" data-bs-toggle="collapse"
@@ -132,18 +136,21 @@
         </ul>
       </div>
     </div>
-    <div class="col border-2 border-start border-end p-0" style="min-height: 91vh;">{% block content %}{% endblock %}
+    <div class="col border-2 border-start border-end p-0" style="min-height: 91vh">
+      {% block content %}{% endblock %}
     </div>
     <div class="col-2 border-2 p-0"></div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{url_for('static',filename='js/handler.js')}}"></script>
+  <script src="{{url_for('static',filename='js/search.js')}}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
     integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
   </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 
 </html>
