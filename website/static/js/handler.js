@@ -1,3 +1,20 @@
+function showMenu(id) {
+  let menu = document.getElementById(`menu-${id}`);
+  if(menu){
+    let listGroup = menu.getElementsByClassName("list-group")[0];
+    listGroup.classList.toggle("d-none");
+  }
+}
+
+function showMenuJawab(id) {
+  let menu = document.getElementById(`menu-answer-${id}`);
+  if(menu) {
+    let listGroup = menu.getElementsByClassName("list-group")[0];
+    listGroup.classList.toggle("d-none");
+  }
+}
+
+
 function bookmarkPost(postId) {
   var bookmarkButton = document.getElementById('bookmark-button-' + postId);
   $.ajax({

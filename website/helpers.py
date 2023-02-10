@@ -3,6 +3,10 @@ from .models import Petani, Pertanyaan, Jawaban, Bookmark, Vote
 from flask_login import current_user
 
 
+def is_owner(id):
+    return id == current_user.id
+
+
 def get_date(date):
     now = dt.now()
     post_date = date
@@ -32,7 +36,8 @@ def get_answer_count(post: Pertanyaan):
 
 
 def get_class(id, type):
-    vote = Vote.query.filter_by(id_jawaban=id, id_petani=current_user.id).first()
+    vote = Vote.query.filter_by(
+        id_jawaban=id, id_petani=current_user.id).first()
     if type == "notif":
         print("notif")
         if not id:
@@ -41,7 +46,8 @@ def get_class(id, type):
             return ""
 
     if type == "bookmark":
-        bookmark = Bookmark.query.filter_by(id_pertanyaan=id, id_petani=current_user.id).first()
+        bookmark = Bookmark.query.filter_by(
+            id_pertanyaan=id, id_petani=current_user.id).first()
         if bookmark:
             return "bi-bookmark-fill"
         else:

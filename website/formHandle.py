@@ -28,6 +28,19 @@ def buatPertanyaan():
     return render_template("buatPertanyaan.html", form=form)
 
 
+@formHandle.route('editPertanyaan/<id>', methods=["GET", "POST"])
+def editPertanyaan(id):
+    form = PostForm(request.form)
+    pertanyaan = Pertanyaan.query.get(id)
+    form.detail.data = pertanyaan.detail
+    if request.method == 'POST':
+        pertanyaan.judul = form.judul.data
+        pertanyaan.detail = form.detail.data
+        db.session.commit()
+        return redirect(url_for("views.detailPertanyaan", id=pertanyaan.id))
+    return render_template("editPertanyaan.html", form=form, post=pertanyaan)
+
+
 @formHandle.route("/upload", methods=["POST"])
 def upload():
     callback = request.args.get("CKEditorFuncNum")

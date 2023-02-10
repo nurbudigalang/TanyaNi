@@ -11,10 +11,10 @@ ckeditor = CKEditor()
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "lancarkanlah project kami ya Tuhan"
-    app.config[
-        "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql://ojv60pm4w1dx3r9z:sx5shx0ka4pta77n@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r6klb8b2tmzunuj8"
-    # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
+    # app.config[
+    #     "SQLALCHEMY_DATABASE_URI"
+    # ] = "mysql://ojv60pm4w1dx3r9z:sx5shx0ka4pta77n@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r6klb8b2tmzunuj8"
+    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     app.config["CKEDITOR_FILE_UPLOADER"] = "formHandle.upload"
     app.config["CKEDITOR_HEIGHT"] = 500
     ckeditor.init_app(app)
@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(formHandle, url_prefix="/")
     app.register_blueprint(controller, url_prefix="/")
 
-    from .helpers import get_user_from_id, get_date, get_answer_count, get_class, get_judul_from_id, get_answer_from_id
+    from .helpers import get_user_from_id, get_date, get_answer_count, get_class, get_judul_from_id, get_answer_from_id, is_owner
     from .models import Petani
 
     with app.app_context():
@@ -46,6 +46,7 @@ def create_app():
         "get_class": get_class,
         "get_judul_from_id": get_judul_from_id,
         "get_answer_from_id": get_answer_from_id,
+        "is_owner": is_owner,
     }
 
     for func_name, func in helper_functions.items():

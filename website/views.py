@@ -27,6 +27,8 @@ def notification():
     return render_template("notification.html", notifications=notifications)
 
 
+
+
 @views.route("/forgotPassword")
 def forgotPassword():
     return render_template("forgot-password.html")

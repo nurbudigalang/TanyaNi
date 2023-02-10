@@ -101,14 +101,33 @@
               class="d-block ui-w-40 rounded-circle"
             />
             <div class="media-body ps-2">
-              <a href="#" data-abc="true" class="text-dark text-decoration-none"
+              <a data-abc="true" class="text-dark text-decoration-none"
                 >{{user_post.nama}}</a
               >
               <div class="text-muted small">{{get_date(post.date)}}</div>
             </div>
           </div>
-          <div class="closetab">
-            <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+
+          <div class="closetab" id="menu-{{post.id}}">
+            <a type="button" onclick="showMenu({{post.id}})">
+              <i class="bi bi-three-dots"></i>
+            </a>
+            {%if is_owner(post.id_petani)%}
+            <ul class="list-group d-none position-absolute mr-1">
+              <a
+                class="text-decoration-none text-dark"
+                href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}"
+              >
+                <li class="list-group-item">Edit</li>
+              </a>
+              <a
+                class="text-decoration-none text-dark"
+                href="{{url_for('controller.remove',id=post.id)}}"
+              >
+                <li class="list-group-item">Hapus</li>
+              </a>
+            </ul>
+            {%endif%}
           </div>
         </div>
 
