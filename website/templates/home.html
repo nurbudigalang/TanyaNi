@@ -1,5 +1,5 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+{% block content%}
 <style>
   img {
     max-width: 100%;
@@ -73,7 +73,7 @@
   }
 
   .card-footer .bi-bookmark-fill {
-    border-color: #4ea24e;
+    color: #4ea24e;
   }
 
   .card-footer a {
@@ -88,25 +88,17 @@
       <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
     </a>
   </div>
-
+  {%for post in posts%} {% set user_post = get_user_from_id(post.id_petani)%}
   <div class="row pt-4 d-flex flex-column">
-    {%for post in posts%} {% set user_post = get_user_from_id(post.id_petani)%}
     <div class="col pb-4">
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <div class="profil d-flex align-items-center">
-            <img
-              src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-              alt=""
-              width="50"
-              height="50"
-              class="d-block ui-w-40 rounded-circle"
-            />
+            <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+              height="50" class="d-block ui-w-40 rounded-circle" />
             <div class="media-body ps-2">
-              <a href="#" data-abc="true" class="text-dark text-decoration-none"
-                >{{user_post.nama}}</a
-              >
-              <div class="text-muted small">{{user_post.date}}</div>
+              <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
+              <div class="text-muted small">{{get_date(post.date)}}</div>
             </div>
           </div>
           <div class="closetab">
@@ -116,34 +108,25 @@
 
         <div class="card-body d-flex flex-column">
           <div class="d-flex justify-content-between Title pb-3">
-            <a
-              href="{{ url_for('views.detailPertanyaan') }}"
-              class="fw-bold text-dark text-decoration-none"
-              >{{post.judul}}</a
-            >
-            <div class="key-word">
-              <button type="button" class="btn btn-light btn-sm">
-                {{post.tags}}
-              </button>
-            </div>
+            <a href="{{ url_for('views.detailPertanyaan',id = post.id) }}"
+              class="fw-bold text-dark text-decoration-none">{{post.judul}}</a>
           </div>
           <div class="question">{{post.detail|safe}}</div>
         </div>
         <div class="card-footer">
-          <a type="button"
-            ><i class="bi bi-bookmark" id="saved" onclick="myFunction()"></i
-          ></a>
-          <a
-            type="button"
-            href="{{ url_for('views.detailPertanyaan') }}"
-            class="text-decoration-none"
-            ><i class="bi bi-chat"></i> 64+</a
-          >
+          <a type="button">
+            <i class="bi {{get_class(post.id,'bookmark')}}" id="bookmark-button-{{ post.id }}"
+              onclick="bookmarkPost({{ post.id }})">
+            </i>
+          </a>
+          <a type="button" href="{{ url_for('views.detailPertanyaan',id = post.id) }}" class="text-decoration-none">
+            <i class="bi bi-chat"></i> {{get_answer_count(post)}}
+          </a>
         </div>
       </div>
     </div>
-    {%endfor%}
   </div>
+  {%endfor%}
 </div>
 
 {% endblock %}

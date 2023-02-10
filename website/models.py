@@ -1,8 +1,11 @@
 from . import db
-
+import pytz
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from flask_ckeditor import CKEditorField
+from datetime import datetime
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
 
 
 class Petani(db.Model, UserMixin):
@@ -18,25 +21,53 @@ class Petani(db.Model, UserMixin):
 class Pertanyaan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
     judul = db.Column(db.String(255))
     detail = db.Column(db.Text)
-    tags = db.Column(db.String(255))
 
 
 class Jawaban(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
     id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
+    date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
     detail = db.Column(db.Text)
+    likes = db.Column(db.Integer, default=0)
+    dislikes = db.Column(db.Integer, default=0)
 
 
-class Gambar_pertanyaan(db.Model):
-    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"), primary_key=True)
-    gambar = db.Column(db.LargeBinary)
+class Notifikasi(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    tipe = db.Column(db.String(255))
+    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
+    id_jawaban = db.Column(db.Integer, db.ForeignKey("jawaban.id"))
+    date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
+    dibaca = db.Column(db.Boolean, default=False)
 
 
-class Gambar_jawaban(db.Model):
-    id_jawaban = db.Column(db.Integer, db.ForeignKey("jawaban.id"), primary_key=True)
-    gambar = db.Column(db.LargeBinary)
+class Bookmark(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
+    date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
+
+
+class Vote(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    id_jawaban = db.Column(db.Integer, db.ForeignKey("jawaban.id"))
+    tipe = db.Column(db.String(255))
+    date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
+
+
+# Helpers CLass
+class AnswerForm(FlaskForm):
+    detail = CKEditorField("detail")
+    submit = SubmitField("Submit")
+
+
+class PostForm(FlaskForm):
+    judul = StringField("judul")
+    detail = CKEditorField("detail")
+    submit = SubmitField("Submit")

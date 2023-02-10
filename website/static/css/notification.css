@@ -1,69 +1,70 @@
-.side-bar, .account-side {
-    display: none;
+.side-bar,
+.account-side {
+  display: none;
 }
 
 .notification {
-    padding: 3rem 0;
+  padding: 3rem 0;
 }
 
 .notification .title {
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 .notification .title h5 {
-    font-size: 18px;
-    font-weight: 600;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .notification .title a {
-    color: #868881;
-    font-size: 13px;
+  color: #868881;
+  font-size: 13px;
 }
 
 .notification .row {
-    --bs-gutter-x: 0rem;
+  --bs-gutter-x: 0rem;
 }
 
 .notification .col {
-    padding: 20px 30px;
-    /* background-color: rgb(157, 249, 157, 20%); */
+  padding: 20px 30px;
+  /* background-color: rgb(157, 249, 157, 20%); */
 }
 
 /* .notification .row :hover{
     background-color: rgb(157, 249, 157, 20%);
 } */
 
-span{
-    font-weight: 500;
+span {
+  font-weight: 500;
 }
 
 .num-notif {
-    color: red;
-    /* opacity: 0; */
+  color: red;
+  /* opacity: 0; */
 }
 
 .notification .text-muted {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .notification .not-text {
-    padding: 0 58px;
-    font-size: 12px;
-    font-weight: 400;
+  padding: 0 58px;
+  font-size: 12px;
+  font-weight: 400;
 }
 
-.notification .profil .media-body a{
-    font-weight: 500;
+.notification .profil .media-body a {
+  font-weight: 500;
 }
 
 .unread {
-    background-color: rgb(157, 249, 157, 20%);
+  background-color: rgb(157, 249, 157, 20%);
 }
 
 .unread:active {
-    background-color: white;
+  background-color: white;
 }
 
-.unread:hover {
-    cursor: pointer;
+.notif-box:hover {
+  cursor: pointer;
 }
