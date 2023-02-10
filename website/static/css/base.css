@@ -9,10 +9,26 @@ body {
   font-size: 14px;
 }
 
+.form-control{
+  font-size: 14px;
+}
+
 .form-control:focus {
   border-color: #4ea24e;
   box-shadow: #4ea24e;
   -webkit-box-shadow: none;
+}
+
+.input-group-append{
+  color: #868881;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 1rem;
+  margin-top: 4px;
+  text-align: center;
+  /* height: 100%; */
+  /* width: 100%; */
 }
 
 .btn-primary {
@@ -62,9 +78,9 @@ body {
   background-color: #4ea24e;
 }
 
-.navbar a {
+/* .navbar a {
   color: white;
-}
+} */
 
 .custom-toggler.navbar-toggler {
   border-color: white;
@@ -79,16 +95,8 @@ body {
   width: 55%;
 }
 
-.ms-n5 {
-  margin-left: -40px;
-}
-
 .navbar-nav .nav-item {
   padding: 0px 0px 0px 30px;
-}
-
-.navbar .btn-outline-secondary:hover {
-  color: #6c757d;
 }
 
 .side-bar {
@@ -124,4 +132,27 @@ body {
 
 .account-side {
   height: 100%;
+}
+
+.instant-results {
+  background: #fff;
+  width: 100%;
+  color: gray;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .175);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .175);
+  /* display: none; */
+  z-index: 9;
+}
+
+.result-entry:hover{
+  background-color: rgb(157, 249, 157, 20%);
+  cursor: pointer;
+}
+
+.instant-results a{
+  color: #6c757d;
+  font-size: 14px;
 }
