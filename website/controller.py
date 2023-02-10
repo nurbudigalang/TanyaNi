@@ -38,7 +38,6 @@ def like_dislike_jawaban():
             id_pertanyaan=jawaban.id_pertanyaan,
             id_jawaban=jawaban.id,
         ).first()
-
         if vote.tipe == tipe:
             # Jika tipe vote sebelumnya sama dengan tipe yang dipilih sekarang, maka hapus vote
             if tipe == "like":
@@ -52,6 +51,13 @@ def like_dislike_jawaban():
             if tipe == "like":
                 jawaban.likes += 1
                 jawaban.dislikes -= 1
+                notifikasi = Notifikasi(
+                    id_petani=jawaban.id_petani,
+                    tipe=tipe,
+                    id_pertanyaan=jawaban.id_pertanyaan,
+                    id_jawaban=jawaban.id,
+                )
+                db.session.add(notifikasi)
             else:
                 jawaban.dislikes += 1
                 jawaban.likes -= 1
