@@ -1,5 +1,4 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %}
-{% block content%}
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
 <style>
   img {
     max-width: 100%;
@@ -94,10 +93,17 @@
       <div class="card">
         <div class="card-header d-flex justify-content-between">
           <div class="profil d-flex align-items-center">
-            <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
-              height="50" class="d-block ui-w-40 rounded-circle" />
+            <img
+              src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+              alt=""
+              width="50"
+              height="50"
+              class="d-block ui-w-40 rounded-circle"
+            />
             <div class="media-body ps-2">
-              <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
+              <a href="#" data-abc="true" class="text-dark text-decoration-none"
+                >{{user_post.nama}}</a
+              >
               <div class="text-muted small">{{get_date(post.date)}}</div>
             </div>
           </div>
@@ -108,18 +114,28 @@
 
         <div class="card-body d-flex flex-column">
           <div class="d-flex justify-content-between Title pb-3">
-            <a href="{{ url_for('views.detailPertanyaan',id = post.id) }}"
-              class="fw-bold text-dark text-decoration-none">{{post.judul}}</a>
+            <a
+              href="{{ url_for('views.detailPertanyaan',id = post.id) }}"
+              class="fw-bold text-dark text-decoration-none"
+              >{{post.judul}}</a
+            >
           </div>
           <div class="question">{{post.detail|safe}}</div>
         </div>
         <div class="card-footer">
           <a type="button">
-            <i class="bi {{get_class(post.id,'bookmark')}}" id="bookmark-button-{{ post.id }}"
-              onclick="bookmarkPost({{ post.id }})">
+            <i
+              class="bi {{get_class(post.id,'bookmark')}}"
+              id="bookmark-button-{{ post.id }}"
+              onclick="bookmarkPost({{ post.id }})"
+            >
             </i>
           </a>
-          <a type="button" href="{{ url_for('views.detailPertanyaan',id = post.id) }}" class="text-decoration-none">
+          <a
+            type="button"
+            href="{{ url_for('views.detailPertanyaan',id = post.id) }}"
+            class="text-decoration-none"
+          >
             <i class="bi bi-chat"></i> {{get_answer_count(post)}}
           </a>
         </div>
