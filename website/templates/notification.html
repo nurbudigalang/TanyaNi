@@ -9,8 +9,8 @@ content %}
             <span class="num-notif" id="notifications"></span>
             <a id="mark_all" href="#" class="text-decoration-none">Tandai Semua Sudah Dibaca</a>
     </div>
-    {%for notification in notifications%}
     <div class="row pt-2 d-flex flex-column">
+        {%for notification in notifications%}
         <div class="col border-top border-bottom notif-box {{get_class(notification.dibaca,'notif')}}"
             id="{{notification.id}}">
             <div class="profil d-flex align-items-center">
@@ -32,10 +32,10 @@ content %}
                 pertanyaan yang Anda ajukan.</span>
             {%endif%}
         </div>
+        {%endfor%}
     </div>
-    {%endfor%}
 </div>
 
-<script src="{{ url_for('static', filename='js/notif.js') }}"></script>
+<script src="{{ url_for('static', filename='js/notification.js') }}"></script>
 
 {% endblock %}

@@ -146,34 +146,3 @@ function getDate(date) {
     );
   });
 })();
-
-const unReadMessages = document.querySelectorAll('.unread');
-const unread = document.getElementById('notifications');
-const markAll = document.getElementById('mark_all');
-const notifs = document.querySelectorAll('.notif-box');
-notifs.forEach((notif) => {
-  notif.addEventListener('click', () => {
-    const notifId = notif.id;
-    if (notif.classList.contains('unread')) {
-      notif.classList.remove('unread');
-    }
-    $.ajax({
-      type: 'POST',
-      url: 'api/notif',
-      data: { notif_id: notifId },
-      success: function (response) {
-        window.location.href = response.redirect_url;
-      },
-    });
-  });
-});
-markAll.addEventListener('click', () => {
-  unReadMessages.forEach((message) => {
-    message.classList.remove('unread');
-  });
-  $.ajax({
-    type: 'POST',
-    url: 'api/notif',
-    data: { notif_id: 'all' },
-  });
-});

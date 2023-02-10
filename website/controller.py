@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, url_for
 from flask_login import login_required, current_user
-from .models import Bookmark, Jawaban, Vote, Notifikasi
+from .models import Bookmark, Jawaban, Vote, Notifikasi, Pertanyaan
 from . import db
 
 controller = Blueprint("controller", __name__)
@@ -116,3 +116,14 @@ def api_notif():
         notif.dibaca = True
         db.session.commit()
         return jsonify({"redirect_url": url_for("views.detailPertanyaan", id=notif.id_pertanyaan)})
+
+
+@controller.route("/api/search", methods=["GET"])
+def search():
+    query = request.args.get("query")
+    print(query)
+    pertanyaan = Pertanyaan.query.filter(Pertanyaan.judul.like("%" + query + "%")).all()
+    result = []
+    for p in pertanyaan:
+        result.append({"id": p.id, "judul": p.judul})
+    return jsonify(result)

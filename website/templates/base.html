@@ -1,272 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-    <title>{% block title %}{% endblock %}</title>
-    <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
+  <title>{% block title %}{% endblock %}</title>
+  <script src="//cdn.ckeditor.com/4.5.3/standard/ckeditor.js"></script>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/base.css') }}"
-    />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
 
-    <!-- <link rel="stylesheet" href="base.css">  -->
-  </head>
+  <!-- <link rel="stylesheet" href="base.css">  -->
+</head>
 
-  <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('views.home') }}">
-          <!-- <h2>L O G O</h2> -->
-          <img class="img-fluid" src="/static/Tanyani.png" alt="" />
-        </a>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-survival101 fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('views.home') }}">
+        <!-- <h2>L O G O</h2> -->
+        <img class="img-fluid" src="/static/Tanyani.png" alt="" />
+      </a>
 
-        <form class="input-group" autocomplete="off">
-          <input
-            class="form-control rounded-0"
-            type="search"
-            placeholder="Cari topik yang diinginkan"
-            id="example-search-input"
-          />
-          <div class="input-group-append">
-            <i class="fa fa-search"></i>
-          </div>
-          <div class="instant-results m-0">
-            <ul class="list-unstyled result-bucket mb-0">
-              <li class="result-entry border border-1">
-                <a
-                  href="{{ url_for('views.searchPage') }}"
-                  class="result-link text-decoration-none"
-                >
-                  <div class="container-fluid p-2">
-                    <i class="fa fa-search"></i>
-                    <span>Cari: petani</span>
-                  </div>
-                </a>
-              </li>
-              <li class="result-entry border border-1">
-                <a
-                  href="{{ url_for('views.searchPage') }}"
-                  class="result-link text-decoration-none"
-                >
-                  <div class="container-fluid p-2">
-                    <span>Petani</span>
-                  </div>
-                </a>
-              </li>
-              <li class="result-entry border border-1">
-                <a
-                  href="{{ url_for('views.searchPage') }}"
-                  class="result-link text-decoration-none"
-                >
-                  <div class="container-fluid p-2">
-                    <span>Petani</span>
-                  </div>
-                </a>
-              </li>
-              <li class="result-entry border border-1">
-                <a
-                  href="{{ url_for('views.searchPage') }}"
-                  class="result-link text-decoration-none"
-                >
-                  <div class="container-fluid p-2">
-                    <span>Petani</span>
-                  </div>
-                </a>
-              </li>
-              <li class="result-entry border border-1">
-                <a
-                  href="{{ url_for('formHandle.buatPertanyaan') }}"
-                  class="result-link text-decoration-none"
-                >
-                  <div class="container-fluid p-2">
-                    <i class="bi bi-plus" style="color: #4ea24e"></i>
-                    <span style="color: #4ea24e">
-                      Tambahkan Pertanyaan Baru
-                    </span>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </form>
+      <form class="input-group" autocomplete="off">
+        <input class="form-control rounded-0" type="search" placeholder="Cari topik yang diinginkan"
+          id="example-search-input" />
+        <div class="input-group-append">
+          <i class="fa fa-search"></i>
+        </div>
+        <div class="instant-results m-0">
+          <ul class="list-unstyled result-bucket mb-0" id="results-list">
 
-        <button
-          class="navbar-toggler ml-auto custom-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div
-          class="collapse navbar-collapse flex-grow-0"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav d-flex align-items-center">
-            <!-- <li class="nav-item">
+          </ul>
+        </div>
+      </form>
+
+      <button class="navbar-toggler ml-auto custom-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
+        <ul class="navbar-nav d-flex align-items-center">
+          <!-- <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('views.notification') }}">
-                <i class="fa fa-bell-o"></i>
-                <!-- <span class="badge rounded-pill badge-notification bg-danger">9</span> -->
-              </a>
-            </li>
-            <li class="nav-item image">
-              <a class="" href="{{ url_for('auth.editProfil') }}">
-                <img
-                  src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-                  alt=""
-                  width="50"
-                  height="50"
-                  class="rounded-circle"
-                />
-              </a>
-            </li>
-          </ul>
-        </div>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('views.notification') }}">
+              <i class="fa fa-bell-o"></i>
+              <!-- <span class="badge rounded-pill badge-notification bg-danger">9</span> -->
+            </a>
+          </li>
+          <li class="nav-item image">
+            <a class="" href="{{ url_for('auth.editProfil') }}">
+              <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+                height="50" class="rounded-circle" />
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
-    {% with messages = get_flashed_messages(with_categories= true ) %} {% if
+    </div>
+  </nav>
+  {% with messages = get_flashed_messages(with_categories= true ) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{message}}
-      <button type="button" class="close" data-dismiss="alert">
-        <spana aria-hidden="true">&times;</spana>
-      </button>
-    </div>
-    {%else%}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{message}}
-      <button type="button" class="close" data-dismiss="alert">
-        <spana aria-hidden="true">&times;</spana>
-      </button>
-    </div>
+  <div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert">
+      <spana aria-hidden="true">&times;</spana>
+    </button>
+  </div>
+  {%else%}
+  <div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert">
+      <spana aria-hidden="true">&times;</spana>
+    </button>
+  </div>
 
-    {%endif%} {% endfor %} {% endif %} {%endwith %}
-    <div class="cek"></div>
+  {%endif%} {% endfor %} {% endif %} {%endwith %}
+  <div class="cek"></div>
 
-    <div class="row test">
-      <div class="col-2 border-2 p-0">
-        <div class="container-fluid side-bar">
-          <ul
-            class="nav align-items-center align-items-sm-start ckck"
-            id="menu"
-          >
-            <li class="nav-item p-2 tos beranda">
-              <a
-                href="{{ url_for('views.home') }}"
-                class="nav-link align-middle px-0 font-italic menu"
-              >
-                <i class="bi bi-house-door"></i>
-                <span class="ms-2 d-none d-lg-inline">Beranda</span>
-              </a>
-            </li>
-            <li class="nav-item p-2 tos pertanyaanku">
-              <a
-                href="{{ url_for('views.pertanyaanku') }}"
-                class="nav-link px-0 align-middle font-italic menu"
-              >
-                <i class="bi bi-chat"></i>
-                <span class="ms-2 d-none d-lg-inline">Pertanyaanku</span></a
-              >
-            </li>
-            <li class="nav-item p-2 tos jawaban">
-              <a
-                href="{{ url_for('views.jawaban') }}"
-                class="nav-link px-0 align-middle font-italic menu"
-              >
-                <i class="bi bi-chat-dots"></i>
-                <span class="ms-2 d-none d-lg-inline">Jawaban</span>
-              </a>
-            </li>
-            <li class="nav-item p-2 tos disimpan">
-              <a
-                href="{{ url_for('views.disimpan') }}"
-                class="nav-link px-0 align-middle font-italic menu"
-              >
-                <i class="bi bi-bookmark"></i>
-                <span class="ms-2 d-none d-lg-inline">Disimpan</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="container-fluid account-side">
-          <div class="informasi p-3">INFORMASI PERSONAL</div>
-          <ul class="nav align-items-sm-start" id="menu">
-            <li class="nav-item p-2 tos editProfil">
-              <a
-                href="{{ url_for('auth.editProfil') }}"
-                class="nav-link align-middle font-italic menu text-start"
-              >
-                <span class="ms-2">Edit Profil</span>
-              </a>
-            </li>
-            <li class="nav-item p-2 tos hapusProfil">
-              <a
-                href="{{ url_for('views.hapusProfil') }}"
-                class="nav-link align-middle font-italic menu text-start"
-              >
-                <span class="ms-2">Hapus Profil</span></a
-              >
-            </li>
-            <li class="nav-item tos logout">
-              <a
-                href="{{ url_for('auth.logout') }}"
-                class="nav-link align-middle font-italic menu"
-              >
-                <i class="bi bi-box-arrow-right"></i>
-                <span class="ms-2">Logout</span></a
-              >
-            </li>
-          </ul>
-        </div>
+  <div class="row test">
+    <div class="col-2 border-2 p-0">
+      <div class="container-fluid side-bar">
+        <ul class="nav align-items-center align-items-sm-start ckck" id="menu">
+          <li class="nav-item p-2 tos beranda">
+            <a href="{{ url_for('views.home') }}" class="nav-link align-middle px-0 font-italic menu">
+              <i class="bi bi-house-door"></i>
+              <span class="ms-2 d-none d-lg-inline">Beranda</span>
+            </a>
+          </li>
+          <li class="nav-item p-2 tos pertanyaanku">
+            <a href="{{ url_for('views.pertanyaanku') }}" class="nav-link px-0 align-middle font-italic menu">
+              <i class="bi bi-chat"></i>
+              <span class="ms-2 d-none d-lg-inline">Pertanyaanku</span></a>
+          </li>
+          <li class="nav-item p-2 tos jawaban">
+            <a href="{{ url_for('views.jawaban') }}" class="nav-link px-0 align-middle font-italic menu">
+              <i class="bi bi-chat-dots"></i>
+              <span class="ms-2 d-none d-lg-inline">Jawaban</span>
+            </a>
+          </li>
+          <li class="nav-item p-2 tos disimpan">
+            <a href="{{ url_for('views.disimpan') }}" class="nav-link px-0 align-middle font-italic menu">
+              <i class="bi bi-bookmark"></i>
+              <span class="ms-2 d-none d-lg-inline">Disimpan</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <div
-        class="col border-2 border-start border-end p-0"
-        style="min-height: 91vh"
-      >
-        {% block content %}{% endblock %}
-      </div>
-      <div class="col-2 border-2 p-0"></div>
-    </div>
 
-    <script src="{{url_for('static',filename='js/handler.js')}}"></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-      integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-      integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </body>
+      <div class="container-fluid account-side">
+        <div class="informasi p-3">INFORMASI PERSONAL</div>
+        <ul class="nav align-items-sm-start" id="menu">
+          <li class="nav-item p-2 tos editProfil">
+            <a href="{{ url_for('auth.editProfil') }}" class="nav-link align-middle font-italic menu text-start">
+              <span class="ms-2">Edit Profil</span>
+            </a>
+          </li>
+          <li class="nav-item p-2 tos hapusProfil">
+            <a href="{{ url_for('views.hapusProfil') }}" class="nav-link align-middle font-italic menu text-start">
+              <span class="ms-2">Hapus Profil</span></a>
+          </li>
+          <li class="nav-item tos logout">
+            <a href="{{ url_for('auth.logout') }}" class="nav-link align-middle font-italic menu">
+              <i class="bi bi-box-arrow-right"></i>
+              <span class="ms-2">Logout</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col border-2 border-start border-end p-0" style="min-height: 91vh">
+      {% block content %}{% endblock %}
+    </div>
+    <div class="col-2 border-2 p-0"></div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{url_for('static',filename='js/handler.js')}}"></script>
+  <script src="{{url_for('static',filename='js/search.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+    integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous">
+  </script>
+</body>
+
 </html>
