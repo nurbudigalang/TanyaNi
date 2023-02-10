@@ -42,7 +42,8 @@ def like_dislike_jawaban():
             # Jika tipe vote sebelumnya sama dengan tipe yang dipilih sekarang, maka hapus vote
             if tipe == "like":
                 jawaban.likes -= 1
-                db.session.delete(notifikasi)
+                if current_user.id != jawaban.id_petani:
+                    db.session.delete(notifikasi)
             else:
                 jawaban.dislikes -= 1
             db.session.delete(vote)
@@ -57,11 +58,13 @@ def like_dislike_jawaban():
                     id_pertanyaan=jawaban.id_pertanyaan,
                     id_jawaban=jawaban.id,
                 )
-                db.session.add(notifikasi)
+                if current_user.id != jawaban.id_petani:
+                    db.session.add(notifikasi)
             else:
                 jawaban.dislikes += 1
                 jawaban.likes -= 1
-                db.session.delete(notifikasi)
+                if current_user.id != jawaban.id_petani:
+                    db.session.delete(notifikasi)
             vote.tipe = tipe
     else:
         # Jika petani belum memberikan vote, maka buat vote baru
@@ -74,7 +77,8 @@ def like_dislike_jawaban():
                 id_pertanyaan=jawaban.id_pertanyaan,
                 id_jawaban=jawaban.id,
             )
-            db.session.add(notifikasi)
+            if current_user.id != jawaban.id_petani:
+                db.session.add(notifikasi)
         else:
             jawaban.dislikes += 1
         db.session.add(vote)
