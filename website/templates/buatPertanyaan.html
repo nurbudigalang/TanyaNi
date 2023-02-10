@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Buat Pertanyaan{% endblock %} {%
 block content %}
 
-<meta charset="utf-8" />
+<!-- <meta charset="utf-8" />
 <meta
   name="viewport"
   content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -14,22 +14,23 @@ block content %}
 
 <script>
   tinymce.init({
-    selector: "textarea#editor",
-    skin: "bootstrap",
-    plugins: "lists, link, image, media",
+    selector: 'textarea#editor',
+    skin: 'bootstrap',
+    plugins: 'lists, link, image, media',
     toolbar:
-      "h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help",
+      'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
     menubar: false,
     statusbar: false,
   });
-</script>
+</script> -->
 
 <style>
   /* .test .col-2{
         display: none;
     } */
 
-  .side-bar {
+  .side-bar,
+  .account-side {
     display: none;
   }
 
@@ -38,10 +39,12 @@ block content %}
     font-weight: 600;
   }
 
+  .form-control,
   .buat-pertanyaan p,
-  li {
+  li,
+  label {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   .buat-pertanyaan .steps {
@@ -54,12 +57,15 @@ block content %}
     color: #868881;
     margin: 0 5px;
     font-size: 1vw;
+    font-weight: 500;
   }
 
   .btn-light:hover {
     border-color: #4ea24e;
   }
 </style>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='js/center.js') }}" />
 
 <div class="container-fluid p-5 buat-pertanyaan">
   <div class="card steps p-4 mb-4">
@@ -75,50 +81,29 @@ block content %}
       </li>
       <li>Deskripsikan masalah Anda secara detail.</li>
       <li>Tuliskan hasil yang Anda harapkan.</li>
-      <li>Tambahkan tag untuk memudahkan pengguna lain menjawab.</li>
       <li>Review pertanyaan Anda dan unggah ke dalam forum.</li>
     </ul>
   </div>
 
-  <div class="card judul p-4 mb-4">
-    <h5>Judul</h5>
-    <p>Buat judul Anda dengan spesifik.</p>
-    <form class="form-group">
-      <input
-        type=""
-        class="form-control"
-        id=""
-        placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
-      />
-    </form>
-  </div>
+  <form class="form-group" method="POST" enctype="multipart/form-data">
+    <div class="card judul p-4 mb-4">
+      <h5>Judul</h5>
+      <p>Buat judul Anda dengan spesifik.</p>
+      {{form.judul(class='form-control', placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?")}}
+    </div>
 
-  <div class="card rincian p-4 mb-4">
-    <h5>Rincian Permasalahan</h5>
-    <p>Buat judul Anda dengan spesifik.</p>
-    <form class="form-group">
-      <textarea
-        name=""
-        id="editor"
-        class="form-control"
-        rows="10"
-        placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?"
-      ></textarea>
-    </form>
-  </div>
-
-  <div class="card tags p-4 mb-4">
-    <h5>Tags</h5>
-    <p>Tambahkan tag yang berkaitan dengan pertanyaan Anda.</p>
-    <form class="form-group">
-      <input type="" class="form-control" id="" placeholder="" />
-    </form>
-  </div>
-
-  <div class="d-flex flex-row">
-    <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    <button type="button" class="btn btn-light">Batal</button>
-  </div>
+    <div class="card rincian p-4 mb-4">
+      <h5>Rincian Permasalahan</h5>
+      <p>Buat judul Anda dengan spesifik.</p>
+      {{form.detail()}}
+    </div>
+    <div class="d-flex flex-row">
+      {{form.submit(class = "btn btn-primary")}}
+      <a href="{{ url_for('views.home') }}">
+        <button type="button" class="btn btn-light">Batal</button>
+      </a>
+    </div>
+  </form>
+  {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail') }}
 </div>
-
 {% endblock %}

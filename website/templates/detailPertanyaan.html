@@ -1,0 +1,220 @@
+{% extends "base.html" %} {% block title %}Detail Pertanyaan{% endblock %} {%
+block content %}
+
+<script>
+  const myModal = document.getElementById("myModal");
+  const myInput = document.getElementById("myInput");
+
+  myModal.addEventListener("shown.bs.modal", () => {
+    myInput.focus();
+  });
+</script>
+
+<style>
+  .modal-dialog {
+    width: 80%;
+    position: relative;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .side-bar,
+  .account-side {
+    display: none;
+  }
+
+  .card-header {
+    padding: 1rem 1rem;
+    background-color: white;
+  }
+
+  .card-header .bi,
+  .card-footer .bi {
+    color: #868881;
+  }
+
+  .card-header .profil .media-body a {
+    font-weight: 500;
+  }
+
+  .card-header .profil .text-muted {
+    font-size: 12px;
+  }
+
+  .key-word button {
+    color: #868881;
+    font-size: x-small;
+  }
+
+  .detail p {
+    color: #868881;
+    font-size: small;
+  }
+
+  .key-word button {
+    border-color: #868881;
+    color: #868881;
+    margin: 0 5px;
+  }
+
+  .key-word button:hover {
+    border-color: #868881;
+  }
+
+  .question .card-body {
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .question .Title p {
+    color: #4ea24e;
+  }
+
+  .card-footer {
+    padding: 1rem 1rem;
+    background-color: white;
+  }
+
+  .card-footer .bi {
+    font-size: medium;
+    padding: 2px;
+  }
+
+  .card-footer .bi-hand-thumbs-up-fill,
+  .card-footer .bi-hand-thumbs-down-fill {
+    color: #4ea24e;
+  }
+
+  .card-footer .bi-hand-thumbs-down-fill {
+    color: #C21010;
+  }
+
+  .card-footer a {
+    color: #868881;
+    font-size: small;
+  }
+
+  a:not([href]):not([class]),
+  a:not([href]):not([class]):hover {
+    color: #868881;
+  }
+
+  textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+
+  hr:not([size]) {
+    height: 2px;
+  }
+
+  .pb-3 span {
+    font-weight: 600;
+    font-size: larger;
+  }
+
+  .like-btn.liked,
+  .dislike-btn.disliked {
+    background-color: blue;
+    color: white;
+  }
+</style>
+{% set user_post = get_user_from_id(post.id_petani)%}
+<div class="container-fluid p-5">
+  <div class="card question">
+    <div class="card-header d-flex justify-content-between border-0">
+      <div class="profil d-flex align-items-center">
+        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+          height="50" class="d-block ui-w-40 rounded-circle" />
+        <div class="media-body ps-2">
+          <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
+          <div class="text-muted small">{{get_date(post.date)}}</div>
+        </div>
+      </div>
+      <div class="closetab">
+        <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+      </div>
+    </div>
+
+    <div class="card-body d-flex flex-column">
+      <div class="d-flex justify-content-between Title">
+        <p class="fw-bold">{{post.judul}}</p>
+      </div>
+      <div class="detail">
+        {{post.detail|safe}}
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="bi bi-pencil-square"></i> Jawab
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="POST" ,enctype="multipart/form-data">
+          <div class="modal-body">
+            {{form.detail()}}
+          </div>
+          <div class="modal-footer">
+            {{form.submit(class = "btn btn-primary")}}
+          </div>
+        </form>
+        {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail') }}
+      </div>
+    </div>
+  </div>
+
+  <hr style="margin: 3rem 0" />
+
+  <div class="pb-3">
+    <span>{{answers.count()}} Jawaban</span>
+  </div>
+
+  {%for answer in answers%} {% set user_comment = get_user_from_id(answer.id_petani)%}
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between">
+      <div class="profil d-flex align-items-center">
+        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+          height="50" class="d-block ui-w-40 rounded-circle" />
+        <div class="media-body ps-2">
+          <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_comment.nama}}</a>
+          <div class="text-muted">{{get_date(answer.date)}}</div>
+        </div>
+      </div>
+      <div class="closetab">
+        <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+      </div>
+    </div>
+
+    <div class="card-body d-flex flex-column">
+      <div class="detail">
+        {{answer.detail|safe}}
+      </div>
+    </div>
+    <div class="card-footer">
+      <a type="button" id="like-button-{{answer.id}}" onclick="likeDislikeJawaban({{ answer.id }},'like')" class="like"
+        style="text-decoration: none;">
+        <i class="bi {{get_class(answer.id,'like')}}"></i> <span id="like-count-{{answer.id}}">{{ answer.likes }}</span>
+      </a>
+      <a type="button" id="dislike-button-{{answer.id}}" onclick="likeDislikeJawaban({{ answer.id }},'dislike')"
+        class="dislike" style="text-decoration: none;">
+        <i class="bi {{get_class(answer.id,'dislike')}}"></i> <span
+          id="dislike-count-{{answer.id}}">{{ answer.dislikes }}</span>
+      </a>
+    </div>
+
+  </div>
+  {%endfor%}
+</div>
+
+{% endblock %}

@@ -1,107 +1,41 @@
 {% extends "base.html" %} {% block title %}Notification{% endblock %} {% block
 content %}
-<style>
-  .side-bar {
-    display: none;
-  }
 
-  .notification {
-    padding: 3rem 0;
-  }
-
-  .notification .title {
-    padding: 0 10px;
-  }
-
-  .notification .title h5 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .notification .title a {
-    color: #868881;
-    font-size: 13px;
-  }
-
-  .notification .row {
-    --bs-gutter-x: 0rem;
-  }
-
-  .notification .col {
-    padding: 20px 30px;
-    background-color: rgb(157, 249, 157, 20%);
-  }
-
-  /* .notification .row :hover{
-        background-color: rgb(157, 249, 157, 20%);
-    } */
-
-  .notification .text-muted {
-    font-size: 12px;
-  }
-
-  .notification .not-text {
-    padding: 0 58px;
-    font-size: 12px;
-    font-weight: 400;
-  }
-  </style>
-  
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/notification.css') }}"
-  />
-  
-  <script src="{{ url_for('static', filename='js/notif.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}" />
 
 <div class="container-fluid notification">
     <div class="title d-flex justify-content-between">
         <h5>Notifikasi</h3>
-        <span id="notifications"></span>
-        <a href="#" class="text-decoration-none mark_all">Tandai Semua Sudah Dibaca</a>
+            <span class="num-notif" id="notifications"></span>
+            <a id="mark_all" href="#" class="text-decoration-none">Tandai Semua Sudah Dibaca</a>
     </div>
+    {%for notification in notifications%}
     <div class="row pt-2 d-flex flex-column">
-        <div class="col border-top border-bottom unread">
+        <div class="col border-top border-bottom notif-box {{get_class(notification.dibaca,'notif')}}"
+            id="{{notification.id}}">
             <div class="profil d-flex align-items-center">
-                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle">
-                <div class="media-body ps-2"> 
-                    <div class="text-muted">1 jam yang lalu</div>
-                    <span>Apa pupuk yang cocok untuk menanam mangga?</span>
+                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+                    height="50" class="d-block ui-w-40 rounded-circle">
+                <div class="media-body ps-2">
+                    <div class="text-muted">{{get_date(notification.date)}}</div>
+                    <a href="{{ url_for('views.detailPertanyaan',id = notification.id_pertanyaan) }}"
+                        class="text-decoration-none text-dark">{{get_judul_from_id(notification.id_pertanyaan)}}</a>
                 </div>
             </div>
-            <span class="not-text">Parimartha menjawab pertanyaan yang Anda ajukan.</span>
-        </div>
-        <div class="col border-top border-bottom unread">
-            <div class="profil d-flex align-items-center">
-                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle">
-                <div class="media-body ps-2"> 
-                    <div class="text-muted">1 jam yang lalu</div>
-                    <span>Apa pupuk yang cocok untuk menanam mangga?</span>
-                </div>
-            </div>
-            <span class="not-text">Parimartha menjawab pertanyaan yang Anda ajukan.</span>
-        </div>
-        <div class="col border-top border-bottom unread">
-            <div class="profil d-flex align-items-center">
-                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle">
-                <div class="media-body ps-2"> 
-                    <div class="text-muted">1 jam yang lalu</div>
-                    <span>Apa pupuk yang cocok untuk menanam mangga?</span>
-                </div>
-            </div>
-            <span class="not-text">Parimartha menjawab pertanyaan yang Anda ajukan.</span>
-        </div>
-        <div class="col border-top border-bottom unread">
-            <div class="profil d-flex align-items-center">
-                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle">
-                <div class="media-body ps-2"> 
-                    <div class="text-muted">1 jam yang lalu</div>
-                    <span>Apa pupuk yang cocok untuk menanam mangga?</span>
-                </div>
-            </div>
-            <span class="not-text">Parimartha menjawab pertanyaan yang Anda ajukan.</span>
+            {%if notification.tipe == 'like'%}
+            <span class="not-text">{{get_user_from_id(get_answer_from_id(notification.id_jawaban).id_petani).nama}}
+                menyukai
+                jawaban anda</span>
+            {%else%}
+            <span class="not-text">{{get_user_from_id(get_answer_from_id(notification.id_jawaban).id_petani).nama}}
+                menjawab
+                pertanyaan yang Anda ajukan.</span>
+            {%endif%}
         </div>
     </div>
+    {%endfor%}
 </div>
+
+<script src="{{ url_for('static', filename='js/notif.js') }}"></script>
 
 {% endblock %}

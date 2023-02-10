@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% block title %}Disimpan{% endblock %} {% block
+content %}
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .account-side {
+    display: none;
+  }
+
+  .disimpan {
+    background-color: rgb(157, 249, 157, 20%);
+  }
+
+  .disimpan .menu {
+    color: #4ea24e;
+    font-weight: 600;
+  }
+
+  .card-header {
+    padding: 1rem 1rem;
+    background-color: white;
+  }
+
+  .card-header .bi,
+  .card-footer .bi {
+    color: #868881;
+  }
+
+  .card-header .profil .text-muted {
+    font-size: 12px;
+  }
+
+  .question p,
+  .key-word button {
+    color: #868881;
+    font-size: small;
+  }
+
+  .key-word button {
+    border-color: #868881;
+    color: #868881;
+    margin: 0 5px;
+  }
+
+  .key-word button:hover {
+    border-color: #868881;
+  }
+
+  .card-body {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .card-footer {
+    padding: 1rem 1rem;
+    background-color: white;
+  }
+
+  .card-footer .bi {
+    font-size: medium;
+    padding: 2px;
+  }
+
+  .card-footer .bi-bookmark-fill {
+    color: #4ea24e;
+  }
+
+  .card-footer a {
+    color: #868881;
+    font-size: small;
+  }
+</style>
+{%if posts.count() ==0%}
+<div class="container-fluid error d-flex flex-column align-items-center p-5">
+  <img class="img-fluid pb-3" style="width: 20%" src="/static/belum menyimpan-03-03.png" alt="" />
+  <h5 class="fw-bold text-muted">Belum ada pertanyaan yang disimpan</h5>
+  <p class="text-muted pb-5 text-sm">
+    Ayo pilih pertanyaan menarik untuk
+    <a href="{{ url_for('views.home') }}" style="text-decoration: none; color: #4ea24e">disimpan</a></p>
+</div>
+{%else%}
+<div class="container-fluid error d-flex flex-column align-items-center p-5 d-none" id="kosong">
+  <img class="img-fluid pb-3" style="width: 20%" src="/static/belum menyimpan-03-03.png" alt="" />
+  <h5 class="fw-bold text-muted">Belum ada pertanyaan yang disimpan</h5>
+  <p class="text-muted pb-5 text-sm">
+    Ayo pilih pertanyaan menarik untuk
+    <a href="{{ url_for('views.home') }}" style="text-decoration: none; color: #4ea24e">disimpan</a></p>
+</div>
+
+<div class="container-fluid flex-column justify-content-between p-5">
+  <div class="row pt-4 d-flex flex-column">
+    {%for post in posts%}{% set user_post = get_user_from_id(post.id_petani)%}
+    <div class="col pb-4" id="post-{{post.id}}">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between">
+          <div class="profil d-flex align-items-center">
+            <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+              height="50" class="d-block ui-w-40 rounded-circle" />
+            <div class="media-body ps-2">
+              <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
+              <div class="text-muted">{{get_date(post.date)}}</div>
+            </div>
+          </div>
+          <div class="closetab">
+            <a type="button" href="#"><i class="bi bi-three-dots"></i></a>
+          </div>
+        </div>
+
+        <div class="card-body d-flex flex-column">
+          <div class="d-flex justify-content-between Title pb-3">
+            <a href="{{ url_for('views.detailPertanyaan',id=1) }}"
+              class="fw-bold text-dark text-decoration-none">{{post.judul}}</a>
+            <div class="key-word">
+              <!-- <span class="badge bg-secondary" href="#">Menanam</span> -->
+              <button type="button" class="btn btn-light btn-sm">
+                Menanam
+              </button>
+              <button type="button" class="btn btn-light btn-sm">Mangga</button>
+            </div>
+          </div>
+          <div class="question">
+            {{post.detail|safe}}
+          </div>
+        </div>
+        <div class="card-footer">
+          <a type="button">
+            <i class="bi {{get_class(post.id,'bookmark')}}" id="bookmark-button-{{ post.id }}"
+              onclick="bookmarkPost({{ post.id }})">
+            </i>
+          </a>
+          <a type="button" href="{{ url_for('views.detailPertanyaan',id = post.id) }}" class="text-decoration-none">
+            <i class="bi bi-chat"></i> {{get_answer_count(post)}}
+          </a>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+{%endif%}
+{% endblock %}

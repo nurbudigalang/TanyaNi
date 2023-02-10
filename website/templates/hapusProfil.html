@@ -1,0 +1,118 @@
+{% extends "base.html" %} {% block title %}Hapus Profil{% endblock %} {% block content
+%}
+
+<style>
+  .side-bar {
+    display: none;
+  }
+
+  .account-side {
+    padding: 2.5rem 0;
+    position: fixed;
+    width: 16.65%;
+  }
+
+  .account-side .informasi {
+    font-weight: 600;
+  }
+
+  .hapusProfil {
+    background-color: rgb(157, 249, 157, 20%);
+    font-weight: 600;
+  }
+
+  .hapusProfil .menu {
+    color: #4ea24e;
+  }
+
+  /* .card {
+    border-top-width: 3px;
+    border-right-width: 3px;
+  } */
+
+  .card-header {
+    font-weight: 600;
+    font-size: large;
+    background-color: white;
+  }
+
+  .card-body {
+    font-size: 1rem;
+  }
+
+  .tost {
+    height: 100%;
+  }
+
+  .form-check-label {
+    font-size: small;
+  }
+
+  .form-check-input:checked {
+    background-color: #4ea24e;
+    border-color: #4ea24e;
+  }
+</style>
+
+<div class="container-fluid flex-column justify-content-between p-5 tost">
+  <div class="d-flex flex-row align-items-center">
+    <img
+      src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+      alt=""
+      width="100"
+      height="100"
+      class="rounded-circle"
+    />
+    <h3 class="ps-3">Petani A</h3>
+  </div>
+
+  <div class="card p-4 mt-5">
+    <div class="card-header pb-4">Hapus Profil</div>
+    <div class="card-body">
+      <p>
+        Sebelum menghapus profil Anda, ada beberapa hal yang perlu diperhatikan
+        :
+      </p>
+      <ol>
+        <li>
+          Anda tidak perlu menghapus akun Anda untuk mengubah nama pengguna.
+          Anda dapat mengubahnya di halaman
+          <a
+            class="link-success text-decoration-none"
+            href="{{ url_for('views.editProfil') }}"
+            >Edit Profil</a
+          >.
+        </li>
+        <li>
+          Penghapusan tidak dapat dibatalkan, dan tidak akan ada cara untuk
+          mendapatkan kembali akun Anda apabila Anda telah menghapus akun.
+        </li>
+        <li>
+          Pertanyaan dan jawaban Anda akan tetap ada, namun akan dianonimkan
+          menjadi user *****
+        </li>
+      </ol>
+
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="flexCheckDefault"
+        />
+        <label class="form-check-label text-muted" for="flexCheckDefault">
+          Saya sudah membaca dan memahami informasi yang telah diberikan. Saya
+          ingin melanjutkan penghapusan profil saya.
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-5 pb-5">
+    <a href="">
+      <button type="button" class="btn btn-primary">Hapus Profil</button>
+    </a>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,14 +1,18 @@
-{% extends "base.html" %} {% block title %}Pertanyaanku{% endblock %} {% block
-content %}
+{% extends "base.html" %} {% block title %}Pertanyaanku{% endblock %}
+{% block content %}
 
 <style>
+  .account-side {
+    display: none;
+  }
+
   .pertanyaanku {
     background-color: rgb(157, 249, 157, 20%);
-    font-weight: 600;
   }
 
   .pertanyaanku .menu {
     color: #4ea24e;
+    font-weight: 600;
   }
 
   .title {
@@ -34,24 +38,38 @@ content %}
     font-size: 1vw;
   } */
 
+
   .notif .row {
     --bs-gutter-x: 0rem;
   }
 
   .notif .col {
     padding: 20px 30px;
+    width: 100%;
   }
 
   .notif .answer {
-    width: 15%;
+    width: 12%;
   }
 
-  .notif .text h5 {
+  .notif .text {
+    width: 80%;
+  }
+
+  .notif .text a {
     color: #4ea24e;
+    font-size: larger;
+    font-weight: 600;
+  }
+
+  .notif img {
+    max-width: 80%;
   }
 
   .notif .text p {
     font-size: small;
+    max-height: 100px;
+    overflow-y: hidden;
   }
 
   .notif .footer .text-muted {
@@ -59,57 +77,72 @@ content %}
   }
 
   .notif .btn-light {
-    font-size: x-small;
+    font-size: small;
+  }
+
+  .dropdown-item:active,
+  .dropdown-item:hover {
+    background-color: rgb(157, 249, 157, 20%);
   }
 </style>
-
+{%if my_posts.count() == 0%}
+<div class="container-fluid error d-flex flex-column align-items-center p-5">
+  <img class="img-fluid pb-3" style="width: 20%" src="/static/Pertanyaan_Petani.jpg" alt="" />
+  <h5 class="fw-bold text-muted">Anda belum memiliki pertanyaan</h5>
+  <p class="text-muted pb-5 text-sm">
+    Ayo buat
+    <a href="{{ url_for('formHandle.buatPertanyaan') }}" style="text-decoration: none; color: #4ea24e">pertanyaan</a>
+    pertama Anda
+      </p>
+</div>
+{%else%}
 <div class="container-fluid flex-column justify-content-between p-5 pb-0">
-  <div class="title">
-    <h5>Semua Jawaban</h5>
-    <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+  <div class="title align-items-center">
+    <h5>Semua Pertanyaan</h5>
+    <a href="{{ url_for('formHandle.buatPertanyaan') }}">
+      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
+    </a>
   </div>
 
   <div class="dropdown text-end pt-4 pb-4">
-    <button
-      class="btn btn-light dropdown-toggle"
-      type="button"
-      id="dropdownMenuButton1"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
-    >
+    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+      aria-expanded="false">
       Sort
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><a class="dropdown-item" href="#">Terbaru</a></li>
-      <li><a class="dropdown-item" href="#">Terlama</a></li>
+      <li><a class="dropdown-item text-muted" href="#">Terbaru</a></li>
+      <li><a class="dropdown-item text-muted" href="#">Terlama</a></li>
     </ul>
   </div>
 </div>
 
 <div class="container-fluid notif p-0">
   <div class="row pt-2 d-flex flex-column">
+    {%for my_post in my_posts%}
     <div class="col border-top border-bottom unread d-flex flex-row">
       <div class="text-muted answer">
-        <p>2 jawaban</p>
+        <p>{{get_answer_count(my_post)}} jawaban</p>
       </div>
       <div class="text">
-        <h5>Apa pupuk yang cocok untuk menanam mangga?</h5>
+        <a href="{{ url_for('views.detailPertanyaan',id=my_post.id) }}"
+          class="text-decoration-none">{{my_post.judul}}</a>
         <p>
-          Saya menggunakan pupuk merk X. Tapi, setelah beberapa bulan masih juga
-          belum ada pertumbuhan. Apakah metode atau treatment yang saya lakukan
-          salah? (lebih banyak)
+          {{my_post.detail|safe}}
+          <span>
+            <p><a href="{{ url_for('views.detailPertanyaan',id=my_post.id) }}">(Lebih Lanjut)</a></p>
+          </span>
         </p>
         <div class="d-flex flex-row justify-content-between footer">
           <div class="key-word">
-            <!-- <span class="badge bg-secondary" href="#">Menanam</span> -->
             <button type="button" class="btn btn-light btn-sm">Menanam</button>
             <button type="button" class="btn btn-light btn-sm">Mangga</button>
           </div>
-          <span class="text-muted">15m yang lalu</span>
+          <span class="text-muted">{{get_date(my_post.date)}}</span>
         </div>
       </div>
     </div>
+    {%endfor%}
   </div>
 </div>
-
+{%endif%}
 {% endblock %}

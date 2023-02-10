@@ -1,0 +1,136 @@
+{% extends "base.html" %} {% block title %}Edit Profil{% endblock %} {% block
+content %}
+
+<style>
+  .side-bar {
+    display: none;
+  }
+
+  .account-side {
+    padding: 2.5rem 0;
+    position: fixed;
+    width: 16.65%;
+  }
+
+  .account-side .informasi {
+    font-weight: 600;
+  }
+
+  .editProfil {
+    background-color: rgb(157, 249, 157, 20%);
+  }
+
+  .editProfil .menu {
+    color: #4ea24e;
+    font-weight: 600;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    font-weight: 600;
+  }
+
+  /* .card {
+    border-bottom-width: 3px;
+    border-right-width: 3px;
+  } */
+
+  .card-header {
+    font-weight: 600;
+    font-size: large;
+    background-color: white;
+  }
+
+  .card-body {
+    font-size: 1rem;
+  }
+
+  .btn-light {
+    border-color: #868881;
+    color: #868881;
+    margin: 0 5px;
+    font-size: 1vw;
+  }
+
+  .btn-light:hover {
+    border-color: #4ea24e;
+  }
+</style>
+
+<form class="form-group" method="POST">
+  <div class="container-fluid flex-column justify-content-between p-5">
+    <div class="d-flex flex-row align-items-center">
+      <img
+        src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
+        alt=""
+        width="100"
+        height="100"
+        class="rounded-circle"
+      />
+      <h3 class="ps-3">{{user.nama}}</h3>
+    </div>
+
+    <div class="card p-4 mt-5">
+      <div class="card-header pb-4">Edit Profil</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <p>Nama</p>
+          <input
+            type=""
+            class="form-control"
+            id="nama"
+            name="nama"
+            value="{{user.nama}}"
+          />
+        </div>
+
+        <div class="mb-3">
+          <p>Lokasi</p>
+          <input
+            type=""
+            class="form-control"
+            id="lokasi"
+            name="lokasi"
+            value="{{user.lokasi}}"
+          />
+        </div>
+
+        <div class="mb-3">
+          <p>Pekerjaan</p>
+          <input
+            type=""
+            class="form-control"
+            id="pekerjaan"
+            name="pekerjaan"
+            value="{{user.pekerjaan}}"
+          />
+        </div>
+
+        <div class="mb-3">
+          <p>Tentang saya</p>
+          <textarea
+            name="tentang_saya"
+            id="editor"
+            class="form-control"
+            rows="10"
+          >
+{{user.tentang_saya}}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex flex-row mt-5">
+      <a href="">
+        <button type="submit" class="btn btn-primary">Simpan Profil</button>
+      </a>
+      <a href="{{ url_for('views.home') }}">
+        <button type="button" class="btn btn-light">Batal</button>
+      </a>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
