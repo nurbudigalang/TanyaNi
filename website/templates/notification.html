@@ -2,12 +2,25 @@
 content %}
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}" />
-
+{%if notifications.count() == 0%}
+<div class="container-fluid error d-flex flex-column align-items-center p-5">
+    <img
+      class="img-fluid pb-3"
+      style="width: 20%"
+      src="/static/Notifikasi-02-02.png" 
+      alt=""
+    />
+    <h5 class="fw-bold text-muted">Anda belum memiliki notifikasi</h5>
+    <p class="text-muted pb-5 text-sm">
+    Informasi segera akan diberitahukan
+    </p>
+</div>
+{%else%}
 <div class="container-fluid notification">
     <div class="title d-flex justify-content-between">
         <h5>Notifikasi</h3>
             <span class="num-notif" id="notifications"></span>
-            <a id="mark_all" href="#" class="text-decoration-none">Tandai Semua Sudah Dibaca</a>
+            <a id="mark_all" href="" class="text-decoration-none">Tandai Semua Sudah Dibaca</a>
     </div>
     <div class="row pt-2 d-flex flex-column">
         {%for notification in notifications%}
@@ -35,7 +48,7 @@ content %}
         {%endfor%}
     </div>
 </div>
-
+{%endif%}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
-
 {% endblock %}

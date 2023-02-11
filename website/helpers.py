@@ -74,4 +74,5 @@ def get_class(id, type):
 
 def get_judul_from_id(id):
     pertanyaan = Pertanyaan.query.get(id)
-    return pertanyaan.judul
+    if pertanyaan:
+        return pertanyaan.judul

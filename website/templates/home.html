@@ -79,6 +79,11 @@
     color: #868881;
     font-size: small;
   }
+
+  .dropdown-item:active,
+  .dropdown-item:hover {
+    background-color: rgb(157, 249, 157, 20%);
+  }
 </style>
 
 <div class="container-fluid flex-column justify-content-between p-5">
@@ -109,22 +114,30 @@
           </div>
 
           <div class="closetab" id="menu-{{post.id}}">
-            <a type="button" onclick="showMenu({{post.id}})">
+            <a
+              class=""
+              href="#"
+              id="dropdownMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              type="button"
+              onclick="showMenu({{post.id}})"
+            >
               <i class="bi bi-three-dots"></i>
             </a>
             {%if is_owner(post.id_petani)%}
-            <ul class="list-group d-none position-absolute mr-1">
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a
                 class="text-decoration-none text-dark"
                 href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}"
               >
-                <li class="list-group-item">Edit</li>
+                <li class="dropdown-item text-muted">Edit</li>
               </a>
               <a
                 class="text-decoration-none text-dark"
                 href="{{url_for('controller.remove',id=post.id)}}"
               >
-                <li class="list-group-item">Hapus</li>
+                <li class="dropdown-item text-muted">Hapus</li>
               </a>
             </ul>
             {%endif%}
