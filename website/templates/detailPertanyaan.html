@@ -9,6 +9,7 @@ block content %}
     console.log("test");
     myInput.focus();
   });
+
   function editJawaban(id, data) {
     document.getElementById("answerButon").click();
     var editor = CKEDITOR.instances["detail"];
@@ -132,17 +133,10 @@ block content %}
   <div class="card question">
     <div class="card-header d-flex justify-content-between border-0">
       <div class="profil d-flex align-items-center">
-        <img
-          src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-          alt=""
-          width="50"
-          height="50"
-          class="d-block ui-w-40 rounded-circle"
-        />
+        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+          height="50" class="d-block ui-w-40 rounded-circle" />
         <div class="media-body ps-2">
-          <a href="#" data-abc="true" class="text-dark text-decoration-none"
-            >{{user_post.nama}}</a
-          >
+          <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
           <div class="text-muted small">{{get_date(post.date)}}</div>
         </div>
       </div>
@@ -152,16 +146,10 @@ block content %}
         </a>
         {%if is_owner(post.id_petani)%}
         <ul class="list-group d-none position-absolute mr-1">
-          <a
-            class="text-decoration-none text-dark"
-            href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}"
-          >
+          <a class="text-decoration-none text-dark" href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}">
             <li class="list-group-item">Edit</li>
           </a>
-          <a
-            class="text-decoration-none text-dark"
-            href="{{url_for('controller.remove',id=post.id)}}"
-          >
+          <a class="text-decoration-none text-dark" href="{{url_for('controller.remove',id=post.id)}}">
             <li class="list-group-item">Hapus</li>
           </a>
         </ul>
@@ -178,42 +166,34 @@ block content %}
   </div>
 
   <div class="mt-5">
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      id="answerButon"
-    >
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+      id="answerButon">
+      {%if isAnswered(post.id)%}
+      <i class="bi bi-pencil-square"></i> Edit Jawaban
+      {%else%}
       <i class="bi bi-pencil-square"></i> Jawab
+      {%endif%}
     </button>
   </div>
 
   <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" ,enctype="multipart/form-data">
-          <div class="modal-body">{{form.detail()}}</div>
-          <div class="modal-footer">
-            {{form.submit(class = "btn btn-primary")}}
-          </div>
-        </form>
-        {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail')
+        {%if isAnswered(post.id)%}
+        <form method="POST" ,enctype="multipart/form-data" action="{{url_for('views.editJawaban', id=post.id) }}">
+          {%else%}
+          <form method="POST" ,enctype="multipart/form-data" action="{{url_for('views.tambahJawaban', id=post.id) }}">
+            {%endif%}
+            <div class="modal-body">{{form.detail()}}</div>
+            <div class="modal-footer">
+              {{form.submit(class = "btn btn-primary")}}
+            </div>
+          </form>
+          {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail')
         }}
       </div>
     </div>
@@ -222,6 +202,7 @@ block content %}
   <hr style="margin: 3rem 0" />
 
   <div class="pb-3">
+
     <span>{{answers.count()}} Jawaban</span>
   </div>
 
@@ -230,17 +211,10 @@ block content %}
   <div class="card mb-3">
     <div class="card-header d-flex justify-content-between">
       <div class="profil d-flex align-items-center">
-        <img
-          src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-          alt=""
-          width="50"
-          height="50"
-          class="d-block ui-w-40 rounded-circle"
-        />
+        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+          height="50" class="d-block ui-w-40 rounded-circle" />
         <div class="media-body ps-2">
-          <a href="#" data-abc="true" class="text-dark text-decoration-none"
-            >{{user_comment.nama}}</a
-          >
+          <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_comment.nama}}</a>
           <div class="text-muted">{{get_date(answer.date)}}</div>
         </div>
       </div>
@@ -250,17 +224,11 @@ block content %}
         </a>
         {%if is_owner(answer.id_petani)%}
         <ul class="list-group d-none position-absolute mr-1">
-          <a
-            type="button"
-            onclick="editJawaban({{answer.id,answer.detail}})"
-            class="text-decoration-none text-dark"
-          >
+          <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-decoration-none text-dark">
             <li class="list-group-item">Edit</li>
           </a>
-          <a
-            class="text-decoration-none text-dark"
-            href="{{url_for('controller.remove',id=post.id)}}"
-          >
+
+          <a class="text-decoration-none text-dark" href="{{url_for('controller.remove',id=post.id)}}">
             <li class="list-group-item">Hapus</li>
           </a>
         </ul>
@@ -272,23 +240,13 @@ block content %}
       <div class="detail">{{answer.detail|safe}}</div>
     </div>
     <div class="card-footer">
-      <a
-        type="button"
-        id="like-button-{{answer.id}}"
-        onclick="likeDislikeJawaban({{ answer.id }},'like')"
-        class="like"
-        style="text-decoration: none"
-      >
+      <a type="button" id="like-button-{{answer.id}}" onclick="likeDislikeJawaban({{ answer.id }},'like')" class="like"
+        style="text-decoration: none">
         <i class="bi {{get_class(answer.id,'like')}}"></i>
         <span id="like-count-{{answer.id}}">{{ answer.likes }}</span>
       </a>
-      <a
-        type="button"
-        id="dislike-button-{{answer.id}}"
-        onclick="likeDislikeJawaban({{ answer.id }},'dislike')"
-        class="dislike"
-        style="text-decoration: none"
-      >
+      <a type="button" id="dislike-button-{{answer.id}}" onclick="likeDislikeJawaban({{ answer.id }},'dislike')"
+        class="dislike" style="text-decoration: none">
         <i class="bi {{get_class(answer.id,'dislike')}}"></i>
         <span id="dislike-count-{{answer.id}}">{{ answer.dislikes }}</span>
       </a>
@@ -296,5 +254,11 @@ block content %}
   </div>
   {%endfor%}
 </div>
+<script>
+  // Mendapatkan referensi CKEditor
+  var editor = CKEDITOR.instances.detail;
+
+  // Menetapkan default value
+</script>
 
 {% endblock %}

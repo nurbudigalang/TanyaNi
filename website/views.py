@@ -22,11 +22,8 @@ def errorPage():
 
 @views.route("/notification")
 def notification():
-    notifications = Notifikasi.query.filter_by(
-        id_petani=current_user.id).order_by(Notifikasi.date.desc())
+    notifications = Notifikasi.query.filter_by(id_petani=current_user.id).order_by(Notifikasi.date.desc())
     return render_template("notification.html", notifications=notifications)
-
-
 
 
 @views.route("/forgotPassword")
@@ -43,12 +40,10 @@ def pertanyaanku():
 @views.route("/disimpan")
 def disimpan():
     # Mendapatkan daftar id pertanyaan yang dibookmark oleh user
-    id_pertanyaan_bookmarked = [
-        bm.id_pertanyaan for bm in Bookmark.query.filter_by(id_petani=current_user.id)]
+    id_pertanyaan_bookmarked = [bm.id_pertanyaan for bm in Bookmark.query.filter_by(id_petani=current_user.id)]
 
     # Menggunakan daftar id pertanyaan untuk memfilter data dari table "pertanyaan"
-    pertanyaan_bookmarked = Pertanyaan.query.filter(
-        Pertanyaan.id.in_(id_pertanyaan_bookmarked))
+    pertanyaan_bookmarked = Pertanyaan.query.filter(Pertanyaan.id.in_(id_pertanyaan_bookmarked))
 
     return render_template("disimpan.html", posts=pertanyaan_bookmarked, user=current_user)
 
@@ -64,19 +59,37 @@ def jawaban():
     return render_template("jawaban.html", answers=answers)
 
 
-@views.route("/detailPertanyaan/<id>", methods=["GET", "POST"])
+@views.route("/detailPertanyaan/<id>", methods=["GET"])
 def detailPertanyaan(id):
     form = AnswerForm(request.form)
+    jawaban = Jawaban.query.filter_by(id_petani=current_user.id, id_pertanyaan=id).first()
+    if jawaban:
+        form.detail.data = jawaban.detail
     post = Pertanyaan.query.get(id)
     answers = Jawaban.query.filter_by(id_pertanyaan=id)
+    return render_template("detailPertanyaan.html", post=post, form=form, answers=answers)
+
+
+@views.route("/editJawaban/<id>", methods=["GET", "POST"])
+def editJawaban(id):
+    answer = Jawaban.query.filter_by(id_petani=current_user.id, id_pertanyaan=id).first()
+    form = AnswerForm(request.form, obj=answer)
+    if request.method == "POST":
+        answer.detail = form.detail.data
+        db.session.commit()
+    return redirect(url_for("views.detailPertanyaan", id=answer.id_pertanyaan))
+
+
+@views.route("/tambahJawaban/<id>", methods=["POST"])
+def tambahJawaban(id):
+    form = AnswerForm(request.form)
+    post = Pertanyaan.query.get(id)
     if request.method == "POST":
         detail = form.detail.data
         user_id = current_user.id
-        new_answer = Jawaban(
-            id_pertanyaan=id, id_petani=user_id, detail=detail)
+        new_answer = Jawaban(id_pertanyaan=id, id_petani=user_id, detail=detail)
         db.session.add(new_answer)
         db.session.commit()
-        answers = Jawaban.query.filter_by(id_pertanyaan=id)
         notifikasi = Notifikasi(
             id_petani=post.id_petani,
             tipe="jawab",
@@ -86,7 +99,6 @@ def detailPertanyaan(id):
         db.session.add(notifikasi)
         db.session.commit()
         return redirect(url_for("views.detailPertanyaan", id=id))
-    return render_template("detailPertanyaan.html", post=post, form=form, answers=answers)
 
 
 @views.route("/searchPage")

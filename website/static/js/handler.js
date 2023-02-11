@@ -1,19 +1,25 @@
 function showMenu(id) {
   let menu = document.getElementById(`menu-${id}`);
-  if(menu){
-    let listGroup = menu.getElementsByClassName("list-group")[0];
-    listGroup.classList.toggle("d-none");
+  if (menu) {
+    let listGroup = menu.getElementsByClassName('list-group')[0];
+    listGroup.classList.toggle('d-none');
   }
 }
 
 function showMenuJawab(id) {
   let menu = document.getElementById(`menu-answer-${id}`);
-  if(menu) {
-    let listGroup = menu.getElementsByClassName("list-group")[0];
-    listGroup.classList.toggle("d-none");
+  if (menu) {
+    let listGroup = menu.getElementsByClassName('list-group')[0];
+    listGroup.classList.toggle('d-none');
   }
 }
 
+function editJawaban(answerDetail) {
+  CKEDITOR.instances['detail'].setData(answerDetail);
+  console.log(answerDetail);
+  $('#exampleModal').modal('show');
+  // $('form').attr('action', '/edit-jawaban/' + answerID);
+}
 
 function bookmarkPost(postId) {
   var bookmarkButton = document.getElementById('bookmark-button-' + postId);

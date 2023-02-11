@@ -29,7 +29,17 @@ def create_app():
     app.register_blueprint(formHandle, url_prefix="/")
     app.register_blueprint(controller, url_prefix="/")
 
-    from .helpers import get_user_from_id, get_date, get_answer_count, get_class, get_judul_from_id, get_answer_from_id, is_owner
+    from .helpers import (
+        get_user_from_id,
+        get_date,
+        get_answer_count,
+        get_class,
+        get_judul_from_id,
+        get_answer_from_id,
+        is_owner,
+        get_answer_detail,
+        isAnswered,
+    )
     from .models import Petani
 
     with app.app_context():
@@ -47,6 +57,8 @@ def create_app():
         "get_judul_from_id": get_judul_from_id,
         "get_answer_from_id": get_answer_from_id,
         "is_owner": is_owner,
+        "get_answer_detail": get_answer_detail,
+        "isAnswered": isAnswered,
     }
 
     for func_name, func in helper_functions.items():
