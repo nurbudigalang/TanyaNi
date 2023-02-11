@@ -1,11 +1,13 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+{% extends "base.html" %} {% block title %}Search Page{% endblock %} {% block
+content%}
 <style>
   img {
     max-width: 100%;
     height: auto;
   }
 
-  .account-side {
+  .account-side,
+  .side-bar {
     display: none;
   }
 
@@ -82,11 +84,6 @@
 </style>
 
 <div class="container-fluid flex-column justify-content-between p-5">
-  <div class="text-end">
-    <a href="{{ url_for('formHandle.buatPertanyaan') }}">
-      <button type="button" class="btn btn-primary">Buat Pertanyaan</button>
-    </a>
-  </div>
   {%for post in posts%} {% set user_post = get_user_from_id(post.id_petani)%}
   <div class="row pt-4 d-flex flex-column">
     <div class="col pb-4">
@@ -101,13 +98,12 @@
               class="d-block ui-w-40 rounded-circle"
             />
             <div class="media-body ps-2">
-              <a data-abc="true" class="text-dark text-decoration-none"
+              <a href="#" data-abc="true" class="text-dark text-decoration-none"
                 >{{user_post.nama}}</a
               >
               <div class="text-muted small">{{get_date(post.date)}}</div>
             </div>
           </div>
-
           <div class="closetab" id="menu-{{post.id}}">
             <a type="button" onclick="showMenu({{post.id}})">
               <i class="bi bi-three-dots"></i>

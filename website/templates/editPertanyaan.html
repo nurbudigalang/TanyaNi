@@ -65,7 +65,10 @@ block content %}
   }
 </style>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='js/center.js') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='js/center.js') }}"
+/>
 
 <div class="container-fluid p-5 buat-pertanyaan">
   <div class="card steps p-4 mb-4">
@@ -89,7 +92,7 @@ block content %}
     <div class="card judul p-4 mb-4">
       <h5>Judul</h5>
       <p>Buat judul Anda dengan spesifik.</p>
-      {{form.judul(class='form-control', placeholder="contoh: Bagaimana menanam pohon pisang dengan baik?")}}
+      {{form.judul(class='form-control', value=post.judul)}}
     </div>
 
     <div class="card rincian p-4 mb-4">

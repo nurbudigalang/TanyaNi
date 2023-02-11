@@ -59,3 +59,26 @@ def createAccount():
             return redirect(url_for("views.home"))
 
     return render_template("create-account.html", user=current_user)
+
+
+@auth.route("/editProfil", methods=['POST','GET'])
+def editProfil():
+    if request.method == 'POST':
+        nama = request.form.get('nama')
+        lokasi = request.form.get('lokasi')
+        pekerjaan = request.form.get('pekerjaan')
+        tentang_saya = request.form.get('tentang_saya')
+
+        if len(nama) <= 3 :
+            flash('Nama harus lebih dari 3 Karakter')
+        elif len(lokasi) <= 3 :
+            flash('Lokasi harus lebih dari 3 Karakter')
+        elif len(pekerjaan) <= 3 : 
+            flash('Lokasi harus lebih dari 3 Karakter')
+        else :
+            current_user.nama = nama
+            current_user.lokasi = lokasi
+            current_user.pekerjaan = pekerjaan
+            current_user.tentang_saya = tentang_saya
+            db.session.commit()
+    return render_template("editProfil.html", user=current_user)

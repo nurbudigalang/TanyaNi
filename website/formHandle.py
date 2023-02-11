@@ -1,20 +1,10 @@
-from flask import Blueprint, render_template, request, url_for, send_from_directory, make_response
+from flask import Blueprint, render_template, request, url_for, send_from_directory, make_response, redirect
 from os.path import join, dirname, realpath
-from flask_wtf import FlaskForm
-from flask_ckeditor import CKEditorField
-from wtforms import StringField, SubmitField
 from flask_login import current_user
-from .models import Pertanyaan
+from .models import Pertanyaan, PostForm
 from . import db
 
 formHandle = Blueprint("formHandle", __name__)
-
-
-class PostForm(FlaskForm):
-    judul = StringField("judul")
-    detail = CKEditorField("detail")
-    tag = StringField("tag")
-    submit = SubmitField("Submit")
 
 
 @formHandle.route("files/<path:filename>")
@@ -29,12 +19,26 @@ def buatPertanyaan():
     if request.method == "POST":
         judul = form.judul.data
         detail = form.detail.data
-        tag = form.tag.data
         user_id = current_user.id
-        new_post = Pertanyaan(id_petani=user_id, judul=judul, detail=detail, tags=tag)
+        new_post = Pertanyaan(id_petani=user_id, judul=judul, detail=detail)
         db.session.add(new_post)
         db.session.commit()
+        return redirect(url_for("views.detailPertanyaan", id=new_post.id))
+
     return render_template("buatPertanyaan.html", form=form)
+
+
+@formHandle.route('editPertanyaan/<id>', methods=["GET", "POST"])
+def editPertanyaan(id):
+    form = PostForm(request.form)
+    pertanyaan = Pertanyaan.query.get(id)
+    form.detail.data = pertanyaan.detail
+    if request.method == 'POST':
+        pertanyaan.judul = form.judul.data
+        pertanyaan.detail = form.detail.data
+        db.session.commit()
+        return redirect(url_for("views.detailPertanyaan", id=pertanyaan.id))
+    return render_template("editPertanyaan.html", form=form, post=pertanyaan)
 
 
 @formHandle.route("/upload", methods=["POST"])
