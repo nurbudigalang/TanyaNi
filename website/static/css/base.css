@@ -47,6 +47,7 @@ body {
   background-color: rgb(157, 249, 157, 20%);
   border-color: #4ea24e;
   color: #4ea24e;
+  box-shadow: none;
 }
 
 .btn-primary:active:focus{
