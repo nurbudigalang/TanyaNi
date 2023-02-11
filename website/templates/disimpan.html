@@ -96,7 +96,7 @@ content %}
 </div>
 {%else%}
 <div
-  class="container-fluid error d-flex flex-column align-items-center justify-content-center p-5"
+  class="container-fluid error d-flex flex-column align-items-center justify-content-center p-5 d-none"
   style="height: 100%"
   id="kosong"
 >
@@ -139,10 +139,10 @@ content %}
             </div>
           </div>
           <div class="closetab" id="menu-{{post.id}}">
+            {%if is_owner(post.id_petani)%}
             <a type="button" onclick="showMenu({{post.id}})">
               <i class="bi bi-three-dots"></i>
             </a>
-            {%if is_owner(post.id_petani)%}
             <ul class="list-group d-none position-absolute mr-1">
               <a
                 class="text-decoration-none text-dark"
@@ -168,13 +168,6 @@ content %}
               class="fw-bold text-dark text-decoration-none"
               >{{post.judul}}</a
             >
-            <div class="key-word">
-              <!-- <span class="badge bg-secondary" href="#">Menanam</span> -->
-              <button type="button" class="btn btn-light btn-sm">
-                Menanam
-              </button>
-              <button type="button" class="btn btn-light btn-sm">Mangga</button>
-            </div>
           </div>
           <div class="question">{{post.detail|safe}}</div>
         </div>
