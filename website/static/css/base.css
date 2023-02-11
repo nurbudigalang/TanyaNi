@@ -49,6 +49,12 @@ body {
   color: #4ea24e;
 }
 
+.btn-light:focus {
+  color: #000;
+  border-color: #4ea24e;
+  box-shadow: none;
+}
+
 .cek {
   height: 65px;
 }
