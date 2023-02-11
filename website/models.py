@@ -20,7 +20,10 @@ class Petani(db.Model, UserMixin):
 
 class Pertanyaan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    id_petani = db.Column(
+        db.Integer,
+        db.ForeignKey("petani.id", ondelete="CASCADE"),
+    )
     date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
     judul = db.Column(db.String(255))
     detail = db.Column(db.Text)
@@ -28,8 +31,14 @@ class Pertanyaan(db.Model):
 
 class Jawaban(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
-    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    id_pertanyaan = db.Column(
+        db.Integer,
+        db.ForeignKey("pertanyaan.id", ondelete="CASCADE"),
+    )
+    id_petani = db.Column(
+        db.Integer,
+        db.ForeignKey("petani.id", ondelete="CASCADE"),
+    )
     date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
     detail = db.Column(db.Text)
     likes = db.Column(db.Integer, default=0)
@@ -38,25 +47,46 @@ class Jawaban(db.Model):
 
 class Notifikasi(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
+    id_petani = db.Column(
+        db.Integer,
+        db.ForeignKey("petani.id", ondelete="CASCADE"),
+    )
     tipe = db.Column(db.String(255))
-    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
-    id_jawaban = db.Column(db.Integer, db.ForeignKey("jawaban.id"))
+    id_pertanyaan = db.Column(
+        db.Integer,
+        db.ForeignKey("pertanyaan.id", ondelete="CASCADE"),
+    )
+    id_jawaban = db.Column(
+        db.Integer,
+        db.ForeignKey("jawaban.id", ondelete="CASCADE"),
+    )
     date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
     dibaca = db.Column(db.Boolean, default=False)
 
 
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
-    id_pertanyaan = db.Column(db.Integer, db.ForeignKey("pertanyaan.id"))
+    id_petani = db.Column(
+        db.Integer,
+        db.ForeignKey("petani.id", ondelete="CASCADE"),
+    )
+    id_pertanyaan = db.Column(
+        db.Integer,
+        db.ForeignKey("pertanyaan.id", ondelete="CASCADE"),
+    )
     date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
 
 
 class Vote(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_petani = db.Column(db.Integer, db.ForeignKey("petani.id"))
-    id_jawaban = db.Column(db.Integer, db.ForeignKey("jawaban.id"))
+    id_petani = db.Column(
+        db.Integer,
+        db.ForeignKey("petani.id", ondelete="CASCADE"),
+    )
+    id_jawaban = db.Column(
+        db.Integer,
+        db.ForeignKey("jawaban.id", ondelete="CASCADE"),
+    )
     tipe = db.Column(db.String(255))
     date = db.Column(db.DateTime(timezone=True), default=datetime.now(pytz.timezone("Asia/Jakarta")))
 

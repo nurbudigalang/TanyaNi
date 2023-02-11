@@ -2,10 +2,19 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_ckeditor import CKEditor
+from sqlalchemy.engine import Engine
+from sqlalchemy import event
 
 db = SQLAlchemy()
 DB_NAME = "tanyaNi.db"
 ckeditor = CKEditor()
+
+
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()
 
 
 def create_app():

@@ -11,12 +11,10 @@ controller = Blueprint("controller", __name__)
 def bookmark():
     if request.method == "POST":
         post_id = request.form.get("post_id")
-        bookmark = Bookmark.query.filter_by(
-            id_pertanyaan=post_id, id_petani=current_user.id).first()
+        bookmark = Bookmark.query.filter_by(id_pertanyaan=post_id, id_petani=current_user.id).first()
         if not bookmark:
             # jika belum, tambahkan ke database
-            bookmark = Bookmark(id_pertanyaan=post_id,
-                                id_petani=current_user.id)
+            bookmark = Bookmark(id_pertanyaan=post_id, id_petani=current_user.id)
             db.session.add(bookmark)
         else:
             db.session.delete(bookmark)
@@ -24,12 +22,12 @@ def bookmark():
         return "nice"
 
 
-@controller.route('/remove/<id>')
+@controller.route("/remove/<id>")
 def remove(id):
     pertanyaan = Pertanyaan.query.get(id)
     db.session.delete(pertanyaan)
     db.session.commit()
-    return redirect(url_for('views.home'))
+    return redirect(url_for("views.home"))
 
 
 @controller.route("/api/jawaban/like_dislike", methods=["POST"])
@@ -40,8 +38,7 @@ def like_dislike_jawaban():
     petani_id = current_user.id
     jawaban = Jawaban.query.get(jawaban_id)
     # Mengecek apakah petani sudah memberikan vote pada jawaban ini
-    vote = Vote.query.filter_by(
-        id_petani=petani_id, id_jawaban=jawaban_id).first()
+    vote = Vote.query.filter_by(id_petani=petani_id, id_jawaban=jawaban_id).first()
     if vote:
         # Jika petani sudah memberikan vote
         notifikasi = Notifikasi.query.filter_by(
@@ -133,8 +130,7 @@ def api_notif():
 def search():
     query = request.args.get("query")
     print(query)
-    pertanyaan = Pertanyaan.query.filter(
-        Pertanyaan.judul.like("%" + query + "%")).all()
+    pertanyaan = Pertanyaan.query.filter(Pertanyaan.judul.like("%" + query + "%")).all()
     result = []
     for p in pertanyaan:
         result.append({"id": p.id, "judul": p.judul})
