@@ -32,10 +32,11 @@ $(document).ready(function () {
           );
           let count = 0;
           data.forEach(function (result) {
+
             if (count < 5) {
               resultsList.append(
                 '<li class="result-entry border border-1">' +
-                  '<a href="detailPertanyaan/' +
+                  '<a href="/detailPertanyaan/' +
                   result.id +
                   '" class="result-link text-decoration-none">' +
                   '<div class="container-fluid p-2">' +

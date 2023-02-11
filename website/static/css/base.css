@@ -49,6 +49,10 @@ body {
   color: #4ea24e;
 }
 
+.btn-primary:active:focus{
+  box-shadow: none;
+}
+
 .btn-light:focus {
   color: #000;
   border-color: #4ea24e;
