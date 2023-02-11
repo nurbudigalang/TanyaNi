@@ -56,7 +56,6 @@ block content %}
   }
 
   .detail p {
-    color: #868881;
     font-size: small;
   }
 
@@ -145,11 +144,11 @@ block content %}
         </div>
       </div>
       <div class="closetab" id="menu-{{post.id}}">
+        {%if is_owner(post.id_petani)%}
         <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" type="button"
           onclick="showMenu({{post.id}})">
           <i class="bi bi-three-dots"></i>
         </a>
-        {%if is_owner(post.id_petani)%}
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <a class="text-decoration-none text-dark" href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}">
             <li class="dropdown-item text-muted">Edit</li>
@@ -216,7 +215,7 @@ block content %}
   <div class="card mb-3">
     <div class="card-header d-flex justify-content-between">
       <div class="profil d-flex align-items-center">
-        <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
+        <img src="/static/profile.jpg" alt="" width="50"
           height="50" class="d-block ui-w-40 rounded-circle" />
         <div class="media-body ps-2">
           <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_comment.nama}}</a>
@@ -224,17 +223,17 @@ block content %}
         </div>
       </div>
       <div class="closetab" id="menu-answer-{{answer.id}}">
-        <a type="button" onclick="showMenuJawab({{answer.id}})">
+        {%if is_owner(answer.id_petani)%}
+        <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" type="button" onclick="showMenuJawab({{answer.id}})">
           <i class="bi bi-three-dots"></i>
         </a>
-        {%if is_owner(answer.id_petani)%}
-        <ul class="list-group d-none position-absolute mr-1">
-          <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-decoration-none text-dark">
-            <li class="list-group-item">Edit</li>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="cursor: pointer;">
+            <li class="dropdown-item text-muted">Edit</li>
           </a>
 
           <a class="text-decoration-none text-dark" href="{{url_for('controller.removeAnswer',id=answer.id)}}">
-            <li class="list-group-item">Hapus</li>
+            <li class="dropdown-item text-muted">Hapus</li>
           </a>
         </ul>
         {%endif%}
