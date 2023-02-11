@@ -58,9 +58,9 @@
             alt=""
           />
         </div>
-        <div class="col-12 col-sm-8 bordered">
+        <div class="col-12 col-sm-8 bordered" style="padding: 6vw 12vw 6vw 6vw">
           <h1>Halo, Petani !</h1>
-          <h2>Bagaimana kabarmu? Mari berbagi ke sesama</h2>
+          <h2 class="mt-4">Bagaimana kabarmu? Mari berbagi ke sesama</h2>
           <form class="col" method="POST">
             <div class="col-md-12 input-container">
               <svf class="bi-envelope icon-form"></svf>
@@ -86,10 +86,12 @@
                 required
               />
             </div>
-            <a class="kata-lupa" href="{{ url_for('views.forgotPassword') }}"
-              >Lupa Password?</a
-            >
-            <div class="col-12">
+            <div class="text-end mt-2">
+              <a class="kata-lupa" href="{{ url_for('views.forgotPassword') }}"
+                >Lupa Password?</a
+              >
+            </div>
+            <div class="col-12 mt-2">
               <div class="form-check kotak-cek">
                 <input
                   class="form-check-input kotak-ingat-saya"
@@ -106,12 +108,12 @@
                 </label>
               </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-4">
               <button class="btn btn-primary button-login" type="submit">
                 Masuk
               </button>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-4">
               <h3>
                 atau masuk dengan
                 <img
@@ -121,7 +123,7 @@
                 />
               </h3>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-4 text-center">
               <h3 class="tanya-status">
                 Baru di sini?
                 <a href="{{ url_for('auth.createAccount') }}"
