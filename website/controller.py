@@ -30,6 +30,15 @@ def remove(id):
     return redirect(url_for("views.home"))
 
 
+@controller.route("/removeAnswer/<id>")
+def removeAnswer(id):
+    jawaban = Jawaban.query.get(id)
+    post_id = jawaban.id_pertanyaan
+    db.session.delete(jawaban)
+    db.session.commit()
+    return redirect(url_for("views.detailPertanyaan", id=post_id))
+
+
 @controller.route("/api/jawaban/like_dislike", methods=["POST"])
 @login_required
 def like_dislike_jawaban():

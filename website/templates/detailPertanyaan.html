@@ -138,37 +138,23 @@ block content %}
   <div class="card question">
     <div class="card-header d-flex justify-content-between border-0">
       <div class="profil d-flex align-items-center">
-        <img src="/static/profile.jpg" alt="" width="50"
-          height="50" class="d-block ui-w-40 rounded-circle" />
+        <img src="/static/profile.jpg" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle" />
         <div class="media-body ps-2">
           <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_post.nama}}</a>
           <div class="text-muted small">{{get_date(post.date)}}</div>
         </div>
       </div>
       <div class="closetab" id="menu-{{post.id}}">
-        <a
-          class=""
-          href="#"
-          id="dropdownMenuLink"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-          type="button"
-          onclick="showMenu({{post.id}})"
-        >
+        <a class="" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" type="button"
+          onclick="showMenu({{post.id}})">
           <i class="bi bi-three-dots"></i>
         </a>
         {%if is_owner(post.id_petani)%}
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a
-            class="text-decoration-none text-dark"
-            href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}"
-          >
+          <a class="text-decoration-none text-dark" href="{{ url_for('formHandle.editPertanyaan',id=post.id)}}">
             <li class="dropdown-item text-muted">Edit</li>
           </a>
-          <a
-            class="text-decoration-none text-dark"
-            href="{{url_for('controller.remove',id=post.id)}}"
-          >
+          <a class="text-decoration-none text-dark" href="{{url_for('controller.remove',id=post.id)}}">
             <li class="dropdown-item text-muted">Hapus</li>
           </a>
         </ul>
@@ -247,7 +233,7 @@ block content %}
             <li class="list-group-item">Edit</li>
           </a>
 
-          <a class="text-decoration-none text-dark" href="{{url_for('controller.remove',id=post.id)}}">
+          <a class="text-decoration-none text-dark" href="{{url_for('controller.removeAnswer',id=answer.id)}}">
             <li class="list-group-item">Hapus</li>
           </a>
         </ul>
