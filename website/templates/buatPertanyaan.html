@@ -65,10 +65,7 @@ block content %}
   }
 </style>
 
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='js/center.js') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='js/center.js') }}" />
 
 <div class="container-fluid p-5 buat-pertanyaan">
   <div class="card steps p-4 mb-4">
@@ -88,12 +85,7 @@ block content %}
     </ul>
   </div>
 
-  <form
-    class="form-group"
-    method="POST"
-    enctype="multipart/form-data"
-    autocomplete="off"
-  >
+  <form class="form-group" method="POST" enctype="multipart/form-data" autocomplete="off">
     <div class="card judul p-4 mb-4">
       <h5>Judul</h5>
       <p>Buat judul Anda dengan spesifik.</p>
@@ -112,6 +104,11 @@ block content %}
       </a>
     </div>
   </form>
-  {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail') }}
+  {{ ckeditor.load() }}
+  {{ ckeditor.config(name = 'detail',custom_config="uiColor: '#ffffff'") }}
+  <script src="{{url_for('static',filename='js/myPlugin.js')}}"></script>
+  <script>
+    CKEDITOR.config.extraPlugins = 'myPlugin';
+  </script>
 </div>
 {% endblock %}

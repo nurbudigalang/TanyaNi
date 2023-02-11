@@ -28,13 +28,13 @@ def buatPertanyaan():
     return render_template("buatPertanyaan.html", form=form)
 
 
-@formHandle.route('editPertanyaan/<id>', methods=["GET", "POST"])
+@formHandle.route("editPertanyaan/<id>", methods=["GET", "POST"])
 def editPertanyaan(id):
-    form = PostForm(request.form)
     pertanyaan = Pertanyaan.query.get(id)
-    form.detail.data = pertanyaan.detail
-    if request.method == 'POST':
+    form = PostForm(request.form, obj=pertanyaan)
+    if request.method == "POST":
         pertanyaan.judul = form.judul.data
+        print(pertanyaan.judul)
         pertanyaan.detail = form.detail.data
         db.session.commit()
         return redirect(url_for("views.detailPertanyaan", id=pertanyaan.id))
