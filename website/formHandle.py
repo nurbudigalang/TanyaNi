@@ -3,6 +3,8 @@ from os.path import join, dirname, realpath
 from flask_login import current_user
 from .models import Pertanyaan, PostForm
 from . import db
+from datetime import datetime
+import pytz
 
 formHandle = Blueprint("formHandle", __name__)
 
@@ -20,7 +22,8 @@ def buatPertanyaan():
         judul = form.judul.data
         detail = form.detail.data
         user_id = current_user.id
-        new_post = Pertanyaan(id_petani=user_id, judul=judul, detail=detail)
+        current_time = datetime.now(pytz.timezone("Asia/Jakarta"))
+        new_post = Pertanyaan(id_petani=user_id, judul=judul, detail=detail, date=current_time)
         db.session.add(new_post)
         db.session.commit()
         return redirect(url_for("views.detailPertanyaan", id=new_post.id))
@@ -34,6 +37,8 @@ def editPertanyaan(id):
     form = PostForm(request.form, obj=pertanyaan)
     if request.method == "POST":
         pertanyaan.judul = form.judul.data
+        current_time = datetime.now(pytz.timezone("Asia/Jakarta"))
+        pertanyaan.date = current_time
         print(pertanyaan.judul)
         pertanyaan.detail = form.detail.data
         db.session.commit()

@@ -2,6 +2,8 @@ from flask import Blueprint, request, jsonify, url_for, redirect
 from flask_login import login_required, current_user
 from .models import Bookmark, Jawaban, Vote, Notifikasi, Pertanyaan
 from . import db
+from datetime import datetime
+import pytz
 
 controller = Blueprint("controller", __name__)
 
@@ -15,6 +17,7 @@ def bookmark():
         if not bookmark:
             # jika belum, tambahkan ke database
             bookmark = Bookmark(id_pertanyaan=post_id, id_petani=current_user.id)
+
             db.session.add(bookmark)
         else:
             db.session.delete(bookmark)
@@ -51,7 +54,7 @@ def like_dislike_jawaban():
     if vote:
         # Jika petani sudah memberikan vote
         notifikasi = Notifikasi.query.filter_by(
-            id_petani=jawaban.id_petani,
+            id_petani=petani_id,
             id_pertanyaan=jawaban.id_pertanyaan,
             id_jawaban=jawaban.id,
         ).first()
@@ -69,11 +72,13 @@ def like_dislike_jawaban():
             if tipe == "like":
                 jawaban.likes += 1
                 jawaban.dislikes -= 1
+                current_time = datetime.now(pytz.timezone("Asia/Jakarta"))
                 notifikasi = Notifikasi(
-                    id_petani=jawaban.id_petani,
+                    id_petani=petani_id,
                     tipe=tipe,
                     id_pertanyaan=jawaban.id_pertanyaan,
                     id_jawaban=jawaban.id,
+                    date=current_time,
                 )
                 if current_user.id != jawaban.id_petani:
                     db.session.add(notifikasi)
@@ -85,14 +90,16 @@ def like_dislike_jawaban():
             vote.tipe = tipe
     else:
         # Jika petani belum memberikan vote, maka buat vote baru
-        vote = Vote(id_petani=petani_id, id_jawaban=jawaban_id, tipe=tipe)
+        current_time = datetime.now(pytz.timezone("Asia/Jakarta"))
+        vote = Vote(id_petani=petani_id, id_jawaban=jawaban_id, tipe=tipe, date=current_time)
         if tipe == "like":
             jawaban.likes += 1
             notifikasi = Notifikasi(
-                id_petani=jawaban.id_petani,
+                id_petani=current_user.id,
                 tipe=tipe,
                 id_pertanyaan=jawaban.id_pertanyaan,
                 id_jawaban=jawaban.id,
+                date=current_time,
             )
             if current_user.id != jawaban.id_petani:
                 db.session.add(notifikasi)
@@ -123,7 +130,21 @@ def count_disimpan():
 def api_notif():
     notif_id = request.form.get("notif_id")
     if notif_id == "all":
-        notifs = Notifikasi.query.filter_by(id_petani=current_user.id)
+
+        def get_notifications(current_user_id):
+            notifications = (
+                Notifikasi.query.join(Pertanyaan, Notifikasi.id_pertanyaan == Pertanyaan.id)
+                .filter(Pertanyaan.id_petani == current_user_id)
+                .union(
+                    Notifikasi.query.join(Jawaban, Notifikasi.id_jawaban == Jawaban.id)
+                    .filter(Jawaban.id_petani == current_user_id)
+                    .filter(Notifikasi.tipe == "like")
+                )
+                .order_by(Notifikasi.date.desc())
+            )
+            return notifications
+
+        notifs = get_notifications(current_user.id)
         for notif in notifs:
             notif.dibaca = True
         db.session.commit()

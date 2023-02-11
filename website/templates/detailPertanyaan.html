@@ -55,8 +55,7 @@ block content %}
     font-size: x-small;
   }
 
-  .detail p {
-    color: #868881;
+  .detail {
     font-size: small;
   }
 
@@ -198,8 +197,8 @@ block content %}
               {{form.submit(class = "btn btn-primary")}}
             </div>
           </form>
-          {{ ckeditor.load(pkg_type='basic') }} {{ ckeditor.config(name='detail')
-        }}
+          {{ ckeditor.load(pkg_type='basic') }}
+          {{ ckeditor.config(name = 'detail',custom_config="uiColor: '#ffffff'") }}
       </div>
     </div>
   </div>
@@ -216,8 +215,7 @@ block content %}
   <div class="card mb-3">
     <div class="card-header d-flex justify-content-between">
       <div class="profil d-flex align-items-center">
-        <img src="/static/profile.jpg" alt="" width="50"
-          height="50" class="d-block ui-w-40 rounded-circle" />
+        <img src="/static/profile.jpg" alt="" width="50" height="50" class="d-block ui-w-40 rounded-circle" />
         <div class="media-body ps-2">
           <a href="#" data-abc="true" class="text-dark text-decoration-none">{{user_comment.nama}}</a>
           <div class="text-muted">{{get_date(answer.date)}}</div>
@@ -225,14 +223,13 @@ block content %}
       </div>
       <div class="closetab" id="menu-answer-{{answer.id}}">
         {%if is_owner(answer.id_petani)%}
-        <a 
-        id="dropdownMenuLink"
-        data-bs-toggle="dropdown"
-        aria-expanded="false" type="button" onclick="showMenuJawab({{answer.id}})">
+        <a id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" type="button"
+          onclick="showMenuJawab({{answer.id}})">
           <i class="bi bi-three-dots"></i>
         </a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a style="cursor: pointer;" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-decoration-none text-dark">
+          <a style="cursor: pointer;" class="text-decoration-none text-dark" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" class="text-decoration-none text-dark">
             <li class="dropdown-item text-muted">Edit</li>
           </a>
 
@@ -262,11 +259,5 @@ block content %}
   </div>
   {%endfor%}
 </div>
-<script>
-  // Mendapatkan referensi CKEditor
-  var editor = CKEDITOR.instances.detail;
-
-  // Menetapkan default value
-</script>
 
 {% endblock %}

@@ -4,16 +4,11 @@ content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}" />
 {%if notifications.count() == 0%}
 <div class="container-fluid error d-flex flex-column align-items-center justify-content-center p-5"
-style="height: 100%">
-    <img
-      class="img-fluid pb-3"
-      style="width: 20%"
-      src="/static/Notifikasi-02-02.png" 
-      alt=""
-    />
+    style="height: 100%">
+    <img class="img-fluid pb-3" style="width: 20%" src="/static/Notifikasi-02-02.png" alt="" />
     <h5 class="fw-bold text-muted">Anda belum memiliki notifikasi</h5>
     <p class="text-muted pb-5 text-sm">
-    Informasi segera akan diberitahukan
+        Informasi segera akan diberitahukan
     </p>
 </div>
 {%else%}
@@ -28,8 +23,8 @@ style="height: 100%">
         <div class="col border-top border-bottom notif-box {{get_class(notification.dibaca,'notif')}}"
             id="{{notification.id}}">
             <div class="profil d-flex align-items-center">
-                <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="" width="50"
-                    height="50" class="d-block ui-w-40 rounded-circle">
+                <img src="{{url_for('static',filename='profile.jpg')}}" alt="" width="50" height="50"
+                    class="d-block ui-w-40 rounded-circle">
                 <div class="media-body ps-2">
                     <div class="text-muted">{{get_date(notification.date)}}</div>
                     <a href="{{ url_for('views.detailPertanyaan',id = notification.id_pertanyaan) }}"
@@ -37,7 +32,7 @@ style="height: 100%">
                 </div>
             </div>
             {%if notification.tipe == 'like'%}
-            <span class="not-text">{{get_user_from_id(get_answer_from_id(notification.id_jawaban).id_petani).nama}}
+            <span class="not-text">{{get_user_from_id(notification.id_petani).nama}}
                 menyukai
                 jawaban anda</span>
             {%else%}
