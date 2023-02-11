@@ -51,7 +51,7 @@ def disimpan():
     return render_template("disimpan.html", posts=pertanyaan_bookmarked, user=current_user)
 
 
-@views.route("/hapusProfil", methods=["POST"])
+@views.route("/hapusProfil", methods=["GET", "POST"])
 def hapusProfil():
     if request.method == "POST":
         db.session.delete(current_user)
