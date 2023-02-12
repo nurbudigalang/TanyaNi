@@ -17,9 +17,9 @@ def home():
     )
 
 
-@views.route("/errorPage")
-def errorPage():
-    return render_template("errorPage.html")
+@views.errorhandler(405)
+def all_exceptions(Exception):
+    return render_template("errorPage.html"), 500
 
 
 @views.route("/notification")

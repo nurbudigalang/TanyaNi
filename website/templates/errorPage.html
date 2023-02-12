@@ -29,9 +29,7 @@ content %}
 
 <div class="container-fluid error">
   <div class="row d-flex justify-content-between align-items-center">
-    <div
-      class="col-7 d-flex flex-column justify-content-center align-items-center"
-    >
+    <div class="col-7 d-flex flex-column justify-content-center align-items-center">
       <h1 class="display-1 fw-bold">404</h1>
       <h3 class="fw-bold text-center">OOPS! MAAF HALAMAN TIDAK DITEMUKAN</h3>
       <p class="text-center fs-6">
@@ -39,8 +37,8 @@ content %}
         rusak, laporkan masalah.
       </p>
       <div class="d-grid gap-2 d-md-block">
-        <button class="btn btn-primary" type="button">Kembali ke Home</button>
-        <button class="btn btn-primary" type="button">Laporkan</button>
+        <a type="button" class="btn btn-primary" href="{{url_for('views.home')}}">Kembali ke Home</a>
+        <!-- <button class="btn btn-danger" type="button">Laporkan</button> -->
       </div>
     </div>
     <div class="col">

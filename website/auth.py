@@ -15,7 +15,6 @@ def login():
         petani = Petani.query.filter_by(email=email).first()
         if petani is not None:
             if check_password_hash(petani.password, password):
-                flash("Anda Berhasil Login!", category="success")
                 login_user(petani, remember=True)
                 return redirect(url_for("views.home"))
             else:
@@ -55,27 +54,26 @@ def createAccount():
             db.session.add(petani_baru)
             db.session.commit()
             login_user(petani_baru, remember=True)
-            flash("Akun anda berhasil dibuat!", category="success")
             return redirect(url_for("views.home"))
 
     return render_template("create-account.html", user=current_user)
 
 
-@auth.route("/editProfil", methods=['POST','GET'])
+@auth.route("/editProfil", methods=["POST", "GET"])
 def editProfil():
-    if request.method == 'POST':
-        nama = request.form.get('nama')
-        lokasi = request.form.get('lokasi')
-        pekerjaan = request.form.get('pekerjaan')
-        tentang_saya = request.form.get('tentang_saya')
+    if request.method == "POST":
+        nama = request.form.get("nama")
+        lokasi = request.form.get("lokasi")
+        pekerjaan = request.form.get("pekerjaan")
+        tentang_saya = request.form.get("tentang_saya")
 
-        if len(nama) <= 3 :
-            flash('Nama harus lebih dari 3 Karakter')
-        elif len(lokasi) <= 3 :
-            flash('Lokasi harus lebih dari 3 Karakter')
-        elif len(pekerjaan) <= 3 : 
-            flash('Lokasi harus lebih dari 3 Karakter')
-        else :
+        if len(nama) <= 3:
+            flash("Nama harus lebih dari 3 Karakter")
+        elif len(lokasi) <= 3:
+            flash("Lokasi harus lebih dari 3 Karakter")
+        elif len(pekerjaan) <= 3:
+            flash("Lokasi harus lebih dari 3 Karakter")
+        else:
             current_user.nama = nama
             current_user.lokasi = lokasi
             current_user.pekerjaan = pekerjaan

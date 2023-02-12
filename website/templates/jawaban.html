@@ -58,6 +58,18 @@ content %}
     font-weight: 600;
   }
 
+  .notif .text h1 {
+    font-size: 1.5rem;
+  }
+
+  .notif .text h2 {
+    font-size: 1.25rem;
+  }
+
+  .notif .text h3 {
+    font-size: 1rem;
+  }
+
   .notif .text {
     font-size: small;
   }
@@ -127,7 +139,8 @@ content %}
     {%for answer in answers%}
     <div class="col border-top border-bottom unread d-flex flex-column">
       <div class="text">
-        <a href="#" class="text-decoration-none">{{get_judul_from_id(answer.id_pertanyaan)}}</a>{{answer.detail|safe}}
+        <a href="{{url_for('views.detailPertanyaan',id = answer.id_pertanyaan)}}"
+          class="text-decoration-none">{{get_judul_from_id(answer.id_pertanyaan)}}</a>{{answer.detail|safe}}
       </div>
       <a href="{{url_for('views.detailPertanyaan',id = answer.id_pertanyaan)}}"
         class="selengkapnya p-0 text-decoration-none" style="font-size: smaller; font-weight: 200">... Selengkapnya</a>

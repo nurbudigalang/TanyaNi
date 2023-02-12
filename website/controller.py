@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, url_for, redirect
+from flask import Blueprint, request, jsonify, url_for, redirect, render_template
 from flask_login import login_required, current_user
 from .models import Bookmark, Jawaban, Vote, Notifikasi, Pertanyaan
 from . import db
@@ -23,6 +23,8 @@ def bookmark():
             db.session.delete(bookmark)
         db.session.commit()
         return "nice"
+    else:
+        return render_template("errorPage.html")
 
 
 @controller.route("/remove/<id>")
