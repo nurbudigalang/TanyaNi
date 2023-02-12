@@ -6,6 +6,9 @@ from flask_ckeditor import CKEditorField
 from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+import os
+
+SQLALCHEMY_DB_URL = os.getenv("DB_CONN")
 
 
 class Petani(db.Model, UserMixin):

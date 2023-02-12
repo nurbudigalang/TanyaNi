@@ -10,20 +10,21 @@ DB_NAME = "tanyaNi.db"
 ckeditor = CKEditor()
 
 
-@event.listens_for(Engine, "connect")
-def set_sqlite_pragma(dbapi_connection, connection_record):
-    cursor = dbapi_connection.cursor()
-    cursor.execute("PRAGMA foreign_keys=ON")
-    cursor.close()
+# @event.listens_for(Engine, "connect")
+# def set_sqlite_pragma(dbapi_connection, connection_record):
+#     cursor = dbapi_connection.cursor()
+#     cursor.execute("PRAGMA foreign_keys=ON")
+#     cursor.close()
 
 
 def create_app():
     app = Flask(__name__)
     app.config["SECRET_KEY"] = "lancarkanlah project kami ya Tuhan"
-    # app.config[
-    #     "SQLALCHEMY_DATABASE_URI"
-    # ] = "mysql://ojv60pm4w1dx3r9z:sx5shx0ka4pta77n@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r6klb8b2tmzunuj8"
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
+    app.config[
+        "SQLALCHEMY_DATABASE_URI"
+    ] = "mysql+pymysql://ojv60pm4w1dx3r9z:sx5shx0ka4pta77n@en1ehf30yom7txe7.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/r6klb8b2tmzunuj8"
+    # app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
+
     app.config["CKEDITOR_FILE_UPLOADER"] = "formHandle.upload"
     app.config["CKEDITOR_HEIGHT"] = 400
     ckeditor.init_app(app)
@@ -52,6 +53,10 @@ def create_app():
     from .models import Petani
 
     with app.app_context():
+        db.create_all()
+
+    @app.before_first_request
+    def setup():
         db.create_all()
 
     login_manager = LoginManager()
