@@ -48,6 +48,9 @@ def createAccount():
         elif len(nama) < 3:
             flash("panjang nama minimal 3 character", category="error")
             pass
+        elif Petani.filter_by(email=email).first():
+            flash("Email sudah terdaftar!", category="error")
+            pass
         else:
             # kondisi terpenuhi untuk membuat akun
             petani_baru = Petani(nama=nama, email=email, password=generate_password_hash(password1, method="sha256"))
