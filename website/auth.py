@@ -39,27 +39,36 @@ def createAccount():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        if password1 != password2:
-            flash("Password tidak sesuai", category="error")
-            pass
-        elif len(password1) < 8:
-            flash("Panjang password minimal 8 Character", category="error")
-            pass
-        elif len(nama) < 3:
-            flash("panjang nama minimal 3 character", category="error")
-            pass
-        elif Petani.filter_by(email=email).first():
-            flash("Email sudah terdaftar!", category="error")
-            pass
-        else:
-            # kondisi terpenuhi untuk membuat akun
-            petani_baru = Petani(nama=nama, email=email, password=generate_password_hash(password1, method="sha256"))
-            db.session.add(petani_baru)
-            db.session.commit()
+        valid, message = validate_account(nama, email, password1, password2)
+
+        if valid:
+            petani_baru = create_new_account(nama, email, password1)
             login_user(petani_baru, remember=True)
             return redirect(url_for("views.home"))
+        else:
+            flash(message, category="error")
 
     return render_template("create-account.html", user=current_user)
+
+
+def validate_account(nama, email, password1, password2):
+    if password1 != password2:
+        return False, "Password tidak sesuai"
+    elif len(password1) < 8:
+        return False, "Panjang password minimal 8 Character"
+    elif len(nama) < 3:
+        return False, "panjang nama minimal 3 character"
+    elif Petani.query.filter_by(email=email).first() is not None:
+        return False, "Email sudah terdaftar!"
+    else:
+        return True, ""
+
+
+def create_new_account(nama, email, password):
+    petani_baru = Petani(nama=nama, email=email, password=generate_password_hash(password, method="sha256"))
+    db.session.add(petani_baru)
+    db.session.commit()
+    return petani_baru
 
 
 @auth.route("/editProfil", methods=["POST", "GET"])
