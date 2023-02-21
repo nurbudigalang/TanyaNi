@@ -115,12 +115,3 @@ h3 a:hover {
   background-color: #4ea24e;
   border-color: #4ea24e;
 }
-
-.alert {
-  align-items: center;
-  width: 100%;
-  border-radius: 0;
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-}
