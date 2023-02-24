@@ -67,27 +67,27 @@
   <div class="row test">
     <div class="col-2 border-2 p-0">
       <div class="container-fluid side-bar">
-        <ul class="nav align-items-center align-items-sm-start ckck" id="menu">
-          <li class="nav-item p-2 tos beranda">
-            <a href="{{ url_for('views.home') }}" class="nav-link align-middle px-0 font-italic menu">
+        <ul class="nav flex-column align-items-start align-items-sm-start ckck" id="menu">
+          <li class="nav-item p-2 tos beranda d-flex justify-content-start">
+            <a href="{{ url_for('views.home') }}" class="nav-link align-middle px-0 font-italic menu ms-5">
               <i class="bi bi-house-door"></i>
               <span class="ms-2 d-none d-lg-inline">Beranda</span>
             </a>
           </li>
-          <li class="nav-item p-2 tos pertanyaanku">
+          <li class="nav-item p-2 tos pertanyaanku d-flex justify-content-start">
             <a href="{{ url_for('views.pertanyaanku',type='desc') }}"
-              class="nav-link px-0 align-middle font-italic menu">
+              class="nav-link px-0 align-middle font-italic menu ms-5">
               <i class="bi bi-question-square"></i>
               <span class="ms-2 d-none d-lg-inline">Pertanyaanku</span></a>
           </li>
-          <li class="nav-item p-2 tos jawaban">
-            <a href="{{ url_for('views.jawaban',type='desc') }}" class="nav-link px-0 align-middle font-italic menu">
+          <li class="nav-item p-2 tos jawaban d-flex justify-content-start">
+            <a href="{{ url_for('views.jawaban',type='desc') }}" class="nav-link px-0 align-middle font-italic menu ms-5">
               <i class="bi bi-chat-dots"></i>
               <span class="ms-2 d-none d-lg-inline">Jawaban</span>
             </a>
           </li>
-          <li class="nav-item p-2 tos disimpan">
-            <a href="{{ url_for('views.disimpan') }}" class="nav-link px-0 align-middle font-italic menu">
+          <li class="nav-item p-2 tos disimpan d-flex justify-content-start">
+            <a href="{{ url_for('views.disimpan') }}" class="nav-link px-0 align-middle font-italic menu ms-5">
               <i class="bi bi-bookmark"></i>
               <span class="ms-2 d-none d-lg-inline">Disimpan</span>
             </a>

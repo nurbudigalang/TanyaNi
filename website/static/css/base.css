@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap");
 
 body {
   font-family: Inter;
@@ -9,7 +9,7 @@ body {
   font-size: 14px;
 }
 
-.form-control{
+.form-control {
   font-size: 14px;
 }
 
@@ -19,7 +19,7 @@ body {
   -webkit-box-shadow: none;
 }
 
-.input-group-append{
+.input-group-append {
   color: #868881;
   position: absolute;
   top: 0;
@@ -50,7 +50,7 @@ body {
   box-shadow: none;
 }
 
-.btn-primary:active:focus{
+.btn-primary:active:focus {
   box-shadow: none;
 }
 
@@ -152,18 +152,18 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, .175);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .175);
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.175);
   /* display: none; */
   z-index: 9;
 }
 
-.result-entry:hover{
+.result-entry:hover {
   background-color: rgb(157, 249, 157, 20%);
   cursor: pointer;
 }
 
-.instant-results a{
+.instant-results a {
   color: #6c757d;
   font-size: 14px;
 }
